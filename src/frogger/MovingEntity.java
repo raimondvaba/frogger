@@ -41,8 +41,7 @@ import java.util.List;
  */
 public abstract class MovingEntity extends Body {
 
-    static final int STEP_SIZE = 32;
-    
+    public static final int STEP_SIZE = 32;
 
     // List that holds collision spheres
     protected List<CollisionObject> collisionObjects;
@@ -50,14 +49,13 @@ public abstract class MovingEntity extends Body {
     public MovingEntity(String name) {
         super(name);
         collisionObjects = new LinkedList<CollisionObject>();
-        
     }
 
     protected void setVisibleFrame(Vector2D v, int a, int b) {
         int index = v.getX() < 0 ? a : b;
         setFrame(index);
     }
-    
+
     public List<CollisionObject> getCollisionObjects() {
         return collisionObjects;
     }
@@ -70,9 +68,8 @@ public abstract class MovingEntity extends Body {
     public void sync(Vector2D position) {
         int i = 0;
         for (CollisionObject a : collisionObjects) {
-            Vector2D deltaPos = new Vector2D(position.getX() + (STEP_SIZE * i), position.getY());
+            Vector2D deltaPos = new Vector2D(position.getX() + (STEP_SIZE * i++), position.getY());
             a.setPosition(deltaPos);
-            i++;
         }
 
     }
