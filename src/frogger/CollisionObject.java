@@ -29,7 +29,7 @@ import jig.engine.physics.vpe.VanillaSphere;
 import jig.engine.util.Vector2D;
 
 public class CollisionObject extends VanillaSphere {
-    
+
     private static final int MIDDLE_OFFSET = 16;
 
     public CollisionObject(Vector2D pos) {
@@ -52,6 +52,7 @@ public class CollisionObject extends VanillaSphere {
         position = new Vector2D(pos.getX() + dX, pos.getY() + dY);
     }
 
-    public void update(long deltaMs) {}
+    public void update(long deltaMs) {
+    }
 
 }
