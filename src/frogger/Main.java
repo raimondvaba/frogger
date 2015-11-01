@@ -303,20 +303,20 @@ public class Main extends StaticScreenGame {
 
         if (keyboard.isPressed(KeyEvent.VK_SPACE)) {
             switch (GameState) {
-            case GAME_INSTRUCTIONS:
-            case GAME_OVER:
-                GameState = GAME_INTRO;
-                space_has_been_released = false;
-                break;
-            default:
-                GameLives = FROGGER_LIVES;
-                GameScore = 0;
-                GameLevel = STARTING_LEVEL;
-                levelTimer = DEFAULT_LEVEL_TIME;
-                frog.setPosition(FROGGER_START);
-                GameState = GAME_PLAY;
-                audiofx.playGameMusic();
-                initializeLevel(GameLevel);
+                case GAME_INSTRUCTIONS:
+                case GAME_OVER:
+                    GameState = GAME_INTRO;
+                    space_has_been_released = false;
+                    break;
+                default:
+                    GameLives = FROGGER_LIVES;
+                    GameScore = 0;
+                    GameLevel = STARTING_LEVEL;
+                    levelTimer = DEFAULT_LEVEL_TIME;
+                    frog.setPosition(FROGGER_START);
+                    GameState = GAME_PLAY;
+                    audiofx.playGameMusic();
+                    initializeLevel(GameLevel);
             }
         }
         if (keyboard.isPressed(KeyEvent.VK_H))
@@ -340,55 +340,55 @@ public class Main extends StaticScreenGame {
      */
     public void update(long deltaMs) {
         switch (GameState) {
-        case GAME_PLAY:
-            froggerKeyboardHandler();
-            wind.update(deltaMs);
-            hwave.update(deltaMs);
-            frog.update(deltaMs);
-            audiofx.update(deltaMs);
-            ui.update(deltaMs);
+            case GAME_PLAY:
+                froggerKeyboardHandler();
+                wind.update(deltaMs);
+                hwave.update(deltaMs);
+                frog.update(deltaMs);
+                audiofx.update(deltaMs);
+                ui.update(deltaMs);
 
-            cycleTraffic(deltaMs);
-            frogCol.testCollision(movingObjectsLayer);
+                cycleTraffic(deltaMs);
+                frogCol.testCollision(movingObjectsLayer);
 
-            // Wind gusts work only when Frogger is on the river
-            if (frogCol.isInRiver())
-                wind.start(GameLevel);
-            wind.perform(frog, GameLevel, deltaMs);
+                // Wind gusts work only when Frogger is on the river
+                if (frogCol.isInRiver())
+                    wind.start(GameLevel);
+                wind.perform(frog, GameLevel, deltaMs);
 
-            // Do the heat wave only when Frogger is on hot pavement
-            if (frogCol.isOnRoad())
-                hwave.start(frog, GameLevel);
-            hwave.perform(frog, deltaMs, GameLevel);
+                // Do the heat wave only when Frogger is on hot pavement
+                if (frogCol.isOnRoad())
+                    hwave.start(frog, GameLevel);
+                hwave.perform(frog, deltaMs, GameLevel);
 
-            if (!frog.isAlive)
-                particleLayer.clear();
+                if (!frog.isAlive)
+                    particleLayer.clear();
 
-            goalmanager.update(deltaMs);
+                goalmanager.update(deltaMs);
 
-            if (goalmanager.getUnreached().size() == 0) {
-                GameState = GAME_FINISH_LEVEL;
-                audiofx.playCompleteLevel();
-                particleLayer.clear();
-            }
+                if (goalmanager.getUnreached().size() == 0) {
+                    GameState = GAME_FINISH_LEVEL;
+                    audiofx.playCompleteLevel();
+                    particleLayer.clear();
+                }
 
-            if (GameLives < 1) {
-                GameState = GAME_OVER;
-            }
+                if (GameLives < 1) {
+                    GameState = GAME_OVER;
+                }
 
-            break;
+                break;
 
-        case GAME_OVER:
-        case GAME_INSTRUCTIONS:
-        case GAME_INTRO:
-            goalmanager.update(deltaMs);
-            menuKeyboardHandler();
-            cycleTraffic(deltaMs);
-            break;
+            case GAME_OVER:
+            case GAME_INSTRUCTIONS:
+            case GAME_INTRO:
+                goalmanager.update(deltaMs);
+                menuKeyboardHandler();
+                cycleTraffic(deltaMs);
+                break;
 
-        case GAME_FINISH_LEVEL:
-            finishLevelKeyboardHandler();
-            break;
+            case GAME_FINISH_LEVEL:
+                finishLevelKeyboardHandler();
+                break;
         }
     }
 
@@ -397,30 +397,30 @@ public class Main extends StaticScreenGame {
      */
     public void render(RenderingContext rc) {
         switch (GameState) {
-        case GAME_FINISH_LEVEL:
-        case GAME_PLAY:
-            backgroundLayer.render(rc);
+            case GAME_FINISH_LEVEL:
+            case GAME_PLAY:
+                backgroundLayer.render(rc);
 
-            if (frog.isAlive) {
+                if (frog.isAlive) {
+                    movingObjectsLayer.render(rc);
+                    // frog.collisionObjects.get(0).render(rc);
+                    frog.render(rc);
+                } else {
+                    frog.render(rc);
+                    movingObjectsLayer.render(rc);
+                }
+
+                particleLayer.render(rc);
+                ui.render(rc);
+                break;
+
+            case GAME_OVER:
+            case GAME_INSTRUCTIONS:
+            case GAME_INTRO:
+                backgroundLayer.render(rc);
                 movingObjectsLayer.render(rc);
-                // frog.collisionObjects.get(0).render(rc);
-                frog.render(rc);
-            } else {
-                frog.render(rc);
-                movingObjectsLayer.render(rc);
-            }
-
-            particleLayer.render(rc);
-            ui.render(rc);
-            break;
-
-        case GAME_OVER:
-        case GAME_INSTRUCTIONS:
-        case GAME_INTRO:
-            backgroundLayer.render(rc);
-            movingObjectsLayer.render(rc);
-            ui.render(rc);
-            break;
+                ui.render(rc);
+                break;
         }
     }
 

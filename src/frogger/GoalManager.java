@@ -63,17 +63,17 @@ public class GoalManager {
 
         // if (level < 3) {
         switch (level) {
-        case 1:
-            goals.add(new Goal(new Vector2D(5 * 32, 32)));
-            goals.add(new Goal(new Vector2D(7 * 32, 32)));
-            break;
-        case 2:
-        default:
-            goals.add(new Goal(new Vector2D(5 * 32, 32)));
-            goals.add(new Goal(new Vector2D(7 * 32, 32)));
-            goals.add(new Goal(new Vector2D(3 * 32, 32)));
-            goals.add(new Goal(new Vector2D(9 * 32, 32)));
-            break;
+            case 1:
+                goals.add(new Goal(new Vector2D(5 * 32, 32)));
+                goals.add(new Goal(new Vector2D(7 * 32, 32)));
+                break;
+            case 2:
+            default:
+                goals.add(new Goal(new Vector2D(5 * 32, 32)));
+                goals.add(new Goal(new Vector2D(7 * 32, 32)));
+                goals.add(new Goal(new Vector2D(3 * 32, 32)));
+                goals.add(new Goal(new Vector2D(9 * 32, 32)));
+                break;
         }
         return;
         // }
