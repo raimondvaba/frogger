@@ -1,60 +1,25 @@
-/**
- * Copyright (c) 2009 Vitaliy Pavlenko
- *
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
- * 
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
- */
-
 package frogger;
 
 import jig.engine.util.Vector2D;
 
-/**
- * Main sprite in the game that a player can control
- * 
- * @author vitaliy
- *
- */
 public class Frogger extends MovingEntity {
 
     final static int MOVE_STEP = 32;
 
-    // Animation related variables
-    final static private int ANIMATION_STEP = 4; // 32/4 = 8, 8 animation
-                                                 // frames, 10 ms each
+    final static private int ANIMATION_STEP = 4;
 
     private int curAnimationFrame = 0;
     private int finalAnimationFrame = 0;
-    private long animationDelay = 10; // milliseconds
+    private long animationDelay = 10;
     private long animationBeginTime = 0;
     private boolean isAnimating = false;
     private Vector2D dirAnimation = new Vector2D(0, 0);
 
-    // Object to follow, such as Tree Log in the river
     private MovingEntity followObject = null;
 
     public boolean isAlive = false;
     private long timeOfDeath = 0;
 
-    // Current sprite frame displayed
     private int currentFrame = 0;
     private int tmpFrame = 0;
 
@@ -66,9 +31,6 @@ public class Frogger extends MovingEntity {
 
     private Main game;
 
-    /**
-     * Build frogger!
-     */
     public Frogger(Main g) {
         super(Main.SPRITE_SHEET + "#frog");
         game = g;
@@ -76,9 +38,6 @@ public class Frogger extends MovingEntity {
         collisionObjects.add(new CollisionObject(position));
     }
 
-    /**
-     * Reset the Frogger to default state and position
-     */
     public void resetFrog() {
         isAlive = true;
         isAnimating = false;
@@ -88,9 +47,6 @@ public class Frogger extends MovingEntity {
         game.levelTimer = Main.DEFAULT_LEVEL_TIME;
     }
 
-    /**
-     * Moving methods, called from Main upon key strokes
-     */
     public void moveLeft() {
         if (getCenterPosition().getX() - 16 > 0 && isAlive && !isAnimating) {
             currentFrame = 3;
@@ -124,26 +80,10 @@ public class Frogger extends MovingEntity {
         }
     }
 
-    /**
-     * Short-cut for systems current time
-     * 
-     * @return
-     */
     public long getTime() {
         return System.currentTimeMillis();
     }
 
-    /**
-     * Initiate animation sequence into specified direction, given by
-     * 
-     * @param dir
-     *            - specifies direction to move
-     * 
-     *            The collision sphere of Frogger is automatically moved to the
-     *            final position. The animation then lags behind by a few
-     *            seconds(or frames). This resolves the positioning bugs when
-     *            objects collide during the animation.
-     */
     public void move(Vector2D dir) {
         followObject = null;
         curAnimationFrame = 0;
@@ -156,30 +96,23 @@ public class Frogger extends MovingEntity {
         tmpFrame = currentFrame;
         currentFrame += 5;
 
-        // Move CollisionSphere to an already animated location
         sync(new Vector2D(position.getX() + dirAnimation.getX() * MOVE_STEP,
                 position.getY() + dirAnimation.getY() * MOVE_STEP));
     }
 
-    /**
-     * Cycle through the animation frames
-     */
     public void updateAnimation() {
-        // If not animating, sync position of the sprite with its collision
-        // sphere
+
         if (!isAnimating || !isAlive) {
             sync(position);
             return;
         }
 
-        // Finish animating
         if (curAnimationFrame >= finalAnimationFrame) {
             isAnimating = false;
             currentFrame = tmpFrame;
             return;
         }
 
-        // Cycle animation
         if (animationBeginTime + animationDelay < getTime()) {
             animationBeginTime = getTime();
             position = new Vector2D(position.getX() + dirAnimation.getX() * ANIMATION_STEP,
@@ -189,9 +122,6 @@ public class Frogger extends MovingEntity {
         }
     }
 
-    /**
-     * Re-align frog to a grid
-     */
     public void allignXPositionToGrid() {
         if (isAnimating || followObject != null)
             return;
@@ -201,11 +131,6 @@ public class Frogger extends MovingEntity {
 
     }
 
-    /**
-     * Following a Tree Log on a river by getting it's velocity vector
-     * 
-     * @param deltaMs
-     */
     public void updateFollow(long deltaMs) {
         if (followObject == null || !isAlive)
             return;
@@ -222,11 +147,6 @@ public class Frogger extends MovingEntity {
         followObject = log;
     }
 
-    /**
-     * Effect of a wind gust on Frogger
-     * 
-     * @param d
-     */
     public void windReposition(Vector2D d) {
         if (isAlive) {
             hw_hasMoved = true;
@@ -235,24 +155,19 @@ public class Frogger extends MovingEntity {
         }
     }
 
-    /**
-     * Effect of Heat Wave on Frogger
-     * 
-     * @param randDuration
-     */
     public void randomJump(final int rDir) {
         switch (rDir) {
-        case 0:
-            moveLeft();
-            break;
-        case 1:
-            moveRight();
-            break;
-        case 2:
-            moveUp();
-            break;
-        default:
-            moveDown();
+            case 0:
+                moveLeft();
+                break;
+            case 1:
+                moveRight();
+                break;
+            case 2:
+                moveUp();
+                break;
+            default:
+                moveDown();
         }
     }
 

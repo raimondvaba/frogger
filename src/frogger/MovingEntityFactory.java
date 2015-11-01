@@ -85,20 +85,20 @@ public class MovingEntityFactory {
 
             if (r.nextInt(100) < chance)
                 switch (type) {
-                case 0: // CAR
-                    rateMs = creationRate[CAR];
-                    return new Car(position, velocity, r.nextInt(Car.TYPES));
-                case 1: // TRUCK
-                    rateMs = creationRate[TRUCK];
-                    return new Truck(position, velocity);
-                case 2: // SLOG
-                    rateMs = creationRate[SLOG];
-                    return new ShortLog(position, velocity);
-                case 3: // LLOG
-                    rateMs = creationRate[LLOG];
-                    return new LongLog(position, velocity);
-                default:
-                    return null;
+                    case 0: // CAR
+                        rateMs = creationRate[CAR];
+                        return new Car(position, velocity, r.nextInt(Car.TYPES));
+                    case 1: // TRUCK
+                        rateMs = creationRate[TRUCK];
+                        return new Truck(position, velocity);
+                    case 2: // SLOG
+                        rateMs = creationRate[SLOG];
+                        return new ShortLog(position, velocity);
+                    case 3: // LLOG
+                        rateMs = creationRate[LLOG];
+                        return new LongLog(position, velocity);
+                    default:
+                        return null;
                 }
         }
 
