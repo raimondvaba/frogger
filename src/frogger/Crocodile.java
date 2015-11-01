@@ -29,7 +29,7 @@ import jig.engine.util.Vector2D;
 
 public class Crocodile extends MovingEntity {
 
-    public final static int STEPS = 3;
+    public final static int STEPS = 4;
     public final static int LENGTH = STEP_SIZE * STEPS;
 
     private long animationDelay = 300;
@@ -42,7 +42,7 @@ public class Crocodile extends MovingEntity {
     public Crocodile(Vector2D pos, Vector2D v) {
         super(Main.SPRITE_SHEET + "#crocodile", pos, v);
 
-        for (int i = 0; i <= STEPS; i++) {
+        for (int i = 0; i < STEPS; i++) {
             Vector2D posSphere = new Vector2D(position.getX() + STEP_SIZE * i, position.getY());
             collisionObjects.add(new CollisionObject("colSmall", posSphere));
         }
