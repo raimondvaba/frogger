@@ -29,6 +29,8 @@ import jig.engine.physics.vpe.VanillaSphere;
 import jig.engine.util.Vector2D;
 
 public class CollisionObject extends VanillaSphere {
+    
+    private static final int MIDDLE_OFFSET = 16;
 
     public CollisionObject(Vector2D pos) {
         super("col");
@@ -45,12 +47,11 @@ public class CollisionObject extends VanillaSphere {
      * appears in the middle of the object
      */
     public void setPosition(Vector2D pos) {
-        double dX = 16 - getRadius();
-        double dY = -getRadius() + 16;
+        double dX = MIDDLE_OFFSET - getRadius();
+        double dY = -getRadius() + MIDDLE_OFFSET;
         position = new Vector2D(pos.getX() + dX, pos.getY() + dY);
     }
 
-    public void update(long deltaMs) {
-        ;
-    }
+    public void update(long deltaMs) {}
+
 }
