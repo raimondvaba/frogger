@@ -29,7 +29,9 @@ import jig.engine.util.Vector2D;
 
 public class Car extends MovingEntity {
     public final static int TYPES = 3;
-    public final static int LENGTH = 32 * 1;
+    static {
+        steps = 1;
+    }
 
     public Car(Vector2D pos, Vector2D v, int randId) {
         super(Main.SPRITE_SHEET + "#car" + randId);
