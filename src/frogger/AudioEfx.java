@@ -36,7 +36,7 @@ import jig.engine.audio.jsound.AudioStream;
 
 /**
  * Controls the audio effects
- * pedekad
+ * pedekad, yoyo
  * @author vitaliy
  *
  */
