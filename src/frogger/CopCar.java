@@ -30,10 +30,8 @@ import jig.engine.util.Vector2D;
 public class CopCar extends MovingEntity {
 
     public CopCar(Vector2D pos, Vector2D v) {
-        super(Main.SPRITE_SHEET + "#copcar");
-        position = pos;
+        super(Main.SPRITE_SHEET + "#copcar", pos, v);
         collisionObjects.add(new CollisionObject(position));
-        velocity = v;
         setVisibleFrame(v, 1, 0);
     }
 

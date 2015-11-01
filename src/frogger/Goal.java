@@ -34,7 +34,7 @@ public class Goal extends MovingEntity {
 
     public Goal(int loc) {
         super(Main.SPRITE_SHEET + "#goal");
-        position = new Vector2D(32 * (1 + 2 * loc), 32);
+        position = new Vector2D(STEP_SIZE * (1 + 2 * loc), STEP_SIZE);
         collisionObjects.add(new CollisionObject("colSmall", position));
         sync(position);
         setFrame(0);

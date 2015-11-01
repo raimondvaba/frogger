@@ -41,9 +41,7 @@ public class Particle extends MovingEntity {
     private int timeAlive = 1;
 
     public Particle(String sprite, Vector2D pos, Vector2D v) {
-        super(sprite);
-        position = pos;
-        velocity = v;
+        super(sprite, pos, v);
         setActivation(true);
         timeExpire = 0;
     }

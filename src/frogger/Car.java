@@ -33,10 +33,8 @@ public class Car extends MovingEntity {
     public final static int LENGTH = STEP_SIZE;
 
     public Car(Vector2D pos, Vector2D v, int randId) {
-        super(Main.SPRITE_SHEET + "#car" + randId);
-        position = pos;
+        super(Main.SPRITE_SHEET + "#car" + randId, pos, v);
         collisionObjects.add(new CollisionObject(position));
-        velocity = v;
         setVisibleFrame(v, 1, 0);
     }
 

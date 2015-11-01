@@ -32,13 +32,11 @@ public class Truck extends MovingEntity {
     public final static int LENGTH = STEP_SIZE * 2;
 
     public Truck(Vector2D pos, Vector2D v) {
-        super(Main.SPRITE_SHEET + "#truck");
-        position = pos;
+        super(Main.SPRITE_SHEET + "#truck", pos, v);
         Vector2D posSphere1 = position;
         Vector2D posSphere2 = new Vector2D(position.getX() + 32, position.getY());
         collisionObjects.add(new CollisionObject(posSphere1));
         collisionObjects.add(new CollisionObject(posSphere2));
-        velocity = v;
 
         setVisibleFrame(v, 1, 0);
     }

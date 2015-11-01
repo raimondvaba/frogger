@@ -69,10 +69,9 @@ public class GoalManager {
                 break;
             case 2:
             default:
-                goals.add(new Goal(new Vector2D(5 * 32, 32)));
-                goals.add(new Goal(new Vector2D(7 * 32, 32)));
-                goals.add(new Goal(new Vector2D(3 * 32, 32)));
-                goals.add(new Goal(new Vector2D(9 * 32, 32)));
+                for (int i = 3; i < 11; i += 2) {
+                    goals.add(new Goal(new Vector2D(i * MovingEntity.STEP_SIZE, MovingEntity.STEP_SIZE)));
+                }
                 break;
         }
         return;
