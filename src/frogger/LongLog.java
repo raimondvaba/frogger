@@ -32,8 +32,7 @@ public class LongLog extends MovingEntity {
     public final static int LENGTH = STEP_SIZE * 4;
 
     public LongLog(Vector2D pos, Vector2D v) {
-        super(Main.SPRITE_SHEET + "#longlog");
-        position = pos;
+        super(Main.SPRITE_SHEET + "#longlog", pos, v);
         Vector2D posSphere1 = position;
         Vector2D posSphere2 = new Vector2D(position.getX() + 32 * 1, position.getY());
         Vector2D posSphere3 = new Vector2D(position.getX() + 32 * 2, position.getY());
@@ -42,7 +41,6 @@ public class LongLog extends MovingEntity {
         collisionObjects.add(new CollisionObject("colSmall", posSphere2));
         collisionObjects.add(new CollisionObject("colSmall", posSphere3));
         collisionObjects.add(new CollisionObject("colSmall", posSphere4));
-        velocity = v;
 
         setVisibleFrame(v, 1, 0);
     }
