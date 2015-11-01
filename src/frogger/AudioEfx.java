@@ -53,31 +53,24 @@ public class AudioEfx {
 
     public static final String A_FX_PATH = Main.RSC_PATH + "ambient_fx/";
 
-    public static AudioClip frogJump = ResourceFactory.getFactory().getAudioClip(
-            Main.RSC_PATH + "jump.wav");
+    public static AudioClip frogJump = ResourceFactory.getFactory().getAudioClip(Main.RSC_PATH + "jump.wav");
 
-    public static AudioClip frogDie = ResourceFactory.getFactory().getAudioClip(
-            Main.RSC_PATH + "frog_die.ogg");
+    public static AudioClip frogDie = ResourceFactory.getFactory().getAudioClip(Main.RSC_PATH + "frog_die.ogg");
 
-    public static AudioClip frogGoal = ResourceFactory.getFactory().getAudioClip(
-            Main.RSC_PATH + "goal.ogg");
+    public static AudioClip frogGoal = ResourceFactory.getFactory().getAudioClip(Main.RSC_PATH + "goal.ogg");
 
-    public static AudioClip levelGoal = ResourceFactory.getFactory().getAudioClip(
-            Main.RSC_PATH + "level_goal.ogg");
+    public static AudioClip levelGoal = ResourceFactory.getFactory().getAudioClip(Main.RSC_PATH + "level_goal.ogg");
 
-    public static AudioClip wind = ResourceFactory.getFactory().getAudioClip(
-            Main.RSC_PATH + "wind.ogg");
+    public static AudioClip wind = ResourceFactory.getFactory().getAudioClip(Main.RSC_PATH + "wind.ogg");
 
-    public static AudioClip heat = ResourceFactory.getFactory().getAudioClip(
-            Main.RSC_PATH + "match.ogg");
+    public static AudioClip heat = ResourceFactory.getFactory().getAudioClip(Main.RSC_PATH + "match.ogg");
 
-    public static AudioClip bonus = ResourceFactory.getFactory().getAudioClip(
-            Main.RSC_PATH + "bonus.ogg");
+    public static AudioClip bonus = ResourceFactory.getFactory().getAudioClip(Main.RSC_PATH + "bonus.ogg");
 
-    public static AudioClip siren = ResourceFactory.getFactory().getAudioClip(
-            A_FX_PATH + "siren.ogg");
+    public static AudioClip siren = ResourceFactory.getFactory().getAudioClip(A_FX_PATH + "siren.ogg");
 
-    // one effect is randomly picked from road_effects or water_effects every couple of seconds
+    // one effect is randomly picked from road_effects or water_effects every
+    // couple of seconds
     private List<AudioClip> road_effects = new LinkedList<AudioClip>();
     private List<AudioClip> water_effects = new LinkedList<AudioClip>();
 
@@ -87,6 +80,7 @@ public class AudioEfx {
     /**
      * In order to know when to play-back certain effects, we track the state of
      * collision detector and Frogger
+     * 
      * @param f
      * @param frg
      */

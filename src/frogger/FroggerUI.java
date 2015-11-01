@@ -37,23 +37,18 @@ import jig.engine.ResourceFactory;
 import jig.engine.ViewableLayer;
 
 public class FroggerUI implements ViewableLayer {
-    private final List<ImageResource> frames = ResourceFactory.getFactory().getFrames(
-            Main.SPRITE_SHEET + "#heart");
+    private final List<ImageResource> frames = ResourceFactory.getFactory().getFrames(Main.SPRITE_SHEET + "#heart");
     List<ImageResource> heart = frames;
-    List<ImageResource> gameOver = ResourceFactory.getFactory().getFrames(
-            Main.SPRITE_SHEET + "#gameover");
-    List<ImageResource> levelFinish = ResourceFactory.getFactory().getFrames(
-            Main.SPRITE_SHEET + "#level_finish");
-    List<ImageResource> introTitle = ResourceFactory.getFactory().getFrames(
-            Main.SPRITE_SHEET + "#splash");
-    List<ImageResource> instructions = ResourceFactory.getFactory().getFrames(
-            Main.SPRITE_SHEET + "#help");
+    List<ImageResource> gameOver = ResourceFactory.getFactory().getFrames(Main.SPRITE_SHEET + "#gameover");
+    List<ImageResource> levelFinish = ResourceFactory.getFactory().getFrames(Main.SPRITE_SHEET + "#level_finish");
+    List<ImageResource> introTitle = ResourceFactory.getFactory().getFrames(Main.SPRITE_SHEET + "#splash");
+    List<ImageResource> instructions = ResourceFactory.getFactory().getFrames(Main.SPRITE_SHEET + "#help");
 
-    FontResource font = ResourceFactory.getFactory().getFontResource(
-            new Font("Sans Serif", Font.BOLD, 14), Color.white, null);
+    FontResource font = ResourceFactory.getFactory().getFontResource(new Font("Sans Serif", Font.BOLD, 14), Color.white,
+            null);
 
-    FontResource fontBlack = ResourceFactory.getFactory().getFontResource(
-            new Font("Sans Serif", Font.BOLD, 14), Color.black, null);
+    FontResource fontBlack = ResourceFactory.getFactory().getFontResource(new Font("Sans Serif", Font.BOLD, 14),
+            Color.black, null);
 
     Main game;
 
@@ -61,14 +56,11 @@ public class FroggerUI implements ViewableLayer {
         game = g;
     }
 
-
     public void render(RenderingContext rc) {
 
-        font.render("Time: " + game.levelTimer, rc,
-                AffineTransform.getTranslateInstance(180, 7));
+        font.render("Time: " + game.levelTimer, rc, AffineTransform.getTranslateInstance(180, 7));
 
-        font.render("Score: " + game.GameScore, rc,
-                AffineTransform.getTranslateInstance(310, 7));
+        font.render("Score: " + game.GameScore, rc, AffineTransform.getTranslateInstance(310, 7));
 
         if (game.GameLives > 0) {
             int dx = 0;
@@ -81,40 +73,34 @@ public class FroggerUI implements ViewableLayer {
                 maxHearts = game.GameLives;
 
             for (int i = 0; i < maxHearts; i++) {
-                heart.get(0).render(rc,
-                        AffineTransform.getTranslateInstance(dx + 8, 8));
+                heart.get(0).render(rc, AffineTransform.getTranslateInstance(dx + 8, 8));
                 dx = 16 * (i + 1);
             }
         }
 
-        font.render("L" + game.GameLevel, rc,
-                AffineTransform.getTranslateInstance(270, 7));
+        font.render("L" + game.GameLevel, rc, AffineTransform.getTranslateInstance(270, 7));
 
         if (game.GameState == Main.GAME_INTRO) {
             introTitle.get(0).render(rc,
-                    AffineTransform.getTranslateInstance(
-                            (Main.WORLD_WIDTH - introTitle.get(0).getWidth()) / 2, 150));
+                    AffineTransform.getTranslateInstance((Main.WORLD_WIDTH - introTitle.get(0).getWidth()) / 2, 150));
             return;
         }
 
         if (game.GameState == Main.GAME_INSTRUCTIONS) {
             instructions.get(0).render(rc,
-                    AffineTransform.getTranslateInstance(
-                            (Main.WORLD_WIDTH - instructions.get(0).getWidth()) / 2, 100));
+                    AffineTransform.getTranslateInstance((Main.WORLD_WIDTH - instructions.get(0).getWidth()) / 2, 100));
             return;
         }
 
         if (game.GameState == Main.GAME_OVER) {
             gameOver.get(0).render(rc,
-                    AffineTransform.getTranslateInstance(
-                            (Main.WORLD_WIDTH - gameOver.get(0).getWidth()) / 2, 150));
+                    AffineTransform.getTranslateInstance((Main.WORLD_WIDTH - gameOver.get(0).getWidth()) / 2, 150));
             return;
         }
 
         if (game.GameState == Main.GAME_FINISH_LEVEL) {
             levelFinish.get(0).render(rc,
-                    AffineTransform.getTranslateInstance(
-                            (Main.WORLD_WIDTH - levelFinish.get(0).getWidth()) / 2, 150));
+                    AffineTransform.getTranslateInstance((Main.WORLD_WIDTH - levelFinish.get(0).getWidth()) / 2, 150));
         }
     }
 
