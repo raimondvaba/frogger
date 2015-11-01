@@ -87,22 +87,18 @@ public class MovingEntityFactory {
 
             if (r.nextInt(100) < chance)
                 switch (type) {
-                    case CAR: // CAR
-
+                    case CAR:
                         return new Car(position, velocity, r.nextInt(Car.TYPES));
-                    case TRUCK: // TRUCK
-
+                    case TRUCK:
                         return new Truck(position, velocity);
-                    case SLOG: // SLOG
-
+                    case SLOG:
                         return new ShortLog(position, velocity);
-                    case LLOG: // LLOG
+                    case LLOG:
                         return new LongLog(position, velocity);
                     default:
                         return null;
                 }
         }
-
         return null;
     }
 
