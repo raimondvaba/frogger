@@ -29,7 +29,8 @@ import jig.engine.util.Vector2D;
 
 public class Crocodile extends MovingEntity {
     
-    public final static int LENGTH = STEP_SIZE * 3;
+    public final static int STEPS = 3;
+    public final static int LENGTH = STEP_SIZE * STEPS;
 
     private long animationDelay = 300;
     private long animationTime = 0;
@@ -39,17 +40,14 @@ public class Crocodile extends MovingEntity {
     protected CollisionObject head;
 
     public Crocodile(Vector2D pos, Vector2D v) {
-        super(Main.SPRITE_SHEET + "#crocodile");
-        position = pos;
-        Vector2D posSphere1 = position;
-        Vector2D posSphere2 = new Vector2D(position.getX() + 32 * 1, position.getY());
-        Vector2D posSphere3 = new Vector2D(position.getX() + 32 * 2, position.getY());
-        Vector2D posSphere4 = new Vector2D(position.getX() + 32 * 3, position.getY());
-        collisionObjects.add(new CollisionObject("colSmall", posSphere1));
-        collisionObjects.add(new CollisionObject("colSmall", posSphere2));
-        collisionObjects.add(new CollisionObject("colSmall", posSphere3));
-        collisionObjects.add(new CollisionObject("colSmall", posSphere4));
-        velocity = v;
+        super(Main.SPRITE_SHEET + "#crocodile", pos, v);
+   
+        collisionObjects.add(new CollisionObject("colSmall", position));
+        
+        for (int i = 1; i <= STEPS; i++) {
+            Vector2D posSphere = new Vector2D(position.getX() + STEP_SIZE * i, position.getY());
+            collisionObjects.add(new CollisionObject("colSmall", posSphere));
+        }
 
         if (v.getX() < 0) {
             startFrame = 2;
