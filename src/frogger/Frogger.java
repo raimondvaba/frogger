@@ -138,11 +138,6 @@ public class Frogger extends MovingEntity {
         position = new Vector2D(position.getX() + dS.getX(), position.getY() + dS.getY());
     }
 
-    /**
-     * Setting a moving entity to follow
-     * 
-     * @param log
-     */
     public void follow(MovingEntity log) {
         followObject = log;
     }
@@ -171,9 +166,6 @@ public class Frogger extends MovingEntity {
         }
     }
 
-    /**
-     * Frogger dies
-     */
     public void die() {
         if (isAnimating)
             return;
@@ -191,9 +183,6 @@ public class Frogger extends MovingEntity {
         game.levelTimer = Main.DEFAULT_LEVEL_TIME;
     }
 
-    /**
-     * Frogger reaches a goal
-     */
     public void reach(final Goal g) {
         if (g.isReached == false) {
             AudioEfx.frogGoal.play(0.4);
@@ -214,7 +203,6 @@ public class Frogger extends MovingEntity {
         if (game.GameLives <= 0)
             return;
 
-        // if dead, stay dead for 2 seconds.
         if (!isAlive && timeOfDeath + 2000 < System.currentTimeMillis())
             resetFrog();
 
