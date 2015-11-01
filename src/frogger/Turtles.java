@@ -109,10 +109,7 @@ public class Turtles extends MovingEntity {
         velocity = v;
 
         // Turtles floating direction, left/right
-        if (v.getX() < 0)
-            setFrame(0);
-        else
-            setFrame(3);
+        setVisibleFrame(v, 0, 3);
     }
 
     /**

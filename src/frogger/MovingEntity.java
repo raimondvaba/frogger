@@ -89,7 +89,7 @@ public abstract class MovingEntity extends Body {
      * detection) travel in y-axis
      */
     public void update(final long deltaMs) {
-        if (position.getX() > Main.WORLD_WIDTH + width || position.getX() < -(32 * 4))
+        if (position.getX() > Main.WORLD_WIDTH + width || position.getX() < -(STEP_SIZE * 4))
             setActivation(false);
 
         position = new Vector2D(position.getX() + velocity.getX() * deltaMs,
