@@ -28,10 +28,8 @@ package frogger;
 import jig.engine.util.Vector2D;
 
 public class Crocodile extends MovingEntity {
-
-    static {
-        steps = 3;
-    }
+    
+    public final static int LENGTH = STEP_SIZE * 3;
 
     private long animationDelay = 300;
     private long animationTime = 0;

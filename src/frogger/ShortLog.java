@@ -29,9 +29,7 @@ import jig.engine.util.Vector2D;
 
 public class ShortLog extends MovingEntity {
 
-    static {
-        steps = 3;
-    }
+    public final static int LENGTH = STEP_SIZE * 3;
 
     public ShortLog(Vector2D pos, Vector2D v) {
         super(Main.SPRITE_SHEET + "#shortlog");

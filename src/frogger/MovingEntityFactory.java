@@ -63,10 +63,10 @@ public class MovingEntityFactory {
         velocity = v;
         r = new Random(System.currentTimeMillis());
 
-        creationRate[CAR] = (int) Math.round(((Car.getLength()) + padding + 32) / Math.abs(velocity.getX()));
-        creationRate[TRUCK] = (int) Math.round(((Truck.getLength()) + padding + 32) / Math.abs(velocity.getX()));
-        creationRate[SLOG] = (int) Math.round(((ShortLog.getLength()) + padding - 32) / Math.abs(velocity.getX()));
-        creationRate[LLOG] = (int) Math.round(((LongLog.getLength()) + padding - 32) / Math.abs(velocity.getX()));
+        creationRate[CAR] = (int) Math.round(((Car.LENGTH) + padding + 32) / Math.abs(velocity.getX()));
+        creationRate[TRUCK] = (int) Math.round(((Truck.LENGTH) + padding + 32) / Math.abs(velocity.getX()));
+        creationRate[SLOG] = (int) Math.round(((ShortLog.LENGTH) + padding - 32) / Math.abs(velocity.getX()));
+        creationRate[LLOG] = (int) Math.round(((LongLog.LENGTH) + padding - 32) / Math.abs(velocity.getX()));
     }
 
     /**

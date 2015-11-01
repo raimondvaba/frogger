@@ -29,9 +29,7 @@ import jig.engine.util.Vector2D;
 
 public class LongLog extends MovingEntity {
 
-    static {
-        steps = 4;
-    }
+    public final static int LENGTH = STEP_SIZE * 4;
 
     public LongLog(Vector2D pos, Vector2D v) {
         super(Main.SPRITE_SHEET + "#longlog");

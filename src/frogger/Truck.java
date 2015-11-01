@@ -29,9 +29,7 @@ import jig.engine.util.Vector2D;
 
 public class Truck extends MovingEntity {
 
-    static {
-        steps = 2;
-    }
+    public final static int LENGTH = STEP_SIZE * 2;
 
     public Truck(Vector2D pos, Vector2D v) {
         super(Main.SPRITE_SHEET + "#truck");
