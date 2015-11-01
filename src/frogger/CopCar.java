@@ -36,4 +36,5 @@ public class CopCar extends MovingEntity {
         velocity = v;
         setVisibleFrame(v, 1, 0);
     }
+
 }

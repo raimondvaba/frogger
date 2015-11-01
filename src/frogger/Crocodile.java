@@ -71,6 +71,7 @@ public class Crocodile extends MovingEntity {
         }
     }
 
+    @Override
     public void update(final long deltaMs) {
         super.update(deltaMs);
         animate(deltaMs);

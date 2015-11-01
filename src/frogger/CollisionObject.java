@@ -46,13 +46,14 @@ public class CollisionObject extends VanillaSphere {
      * Depending on the collision sphere, we offset it's position so that it
      * appears in the middle of the object
      */
+    @Override
     public void setPosition(Vector2D pos) {
         double dX = MIDDLE_OFFSET - getRadius();
         double dY = -getRadius() + MIDDLE_OFFSET;
         position = new Vector2D(pos.getX() + dX, pos.getY() + dY);
     }
 
-    public void update(long deltaMs) {
-    }
+    @Override
+    public void update(long deltaMs) {}
 
 }

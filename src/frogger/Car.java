@@ -28,6 +28,7 @@ package frogger;
 import jig.engine.util.Vector2D;
 
 public class Car extends MovingEntity {
+
     public final static int TYPES = 3;
     public final static int LENGTH = STEP_SIZE;
 
@@ -38,4 +39,5 @@ public class Car extends MovingEntity {
         velocity = v;
         setVisibleFrame(v, 1, 0);
     }
+
 }
