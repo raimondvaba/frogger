@@ -48,7 +48,7 @@ public class Frogger extends MovingEntity {
     }
 
     public void moveLeft() {
-        if (getCenterPosition().getX() - 16 > 0 && isAlive && !isAnimating) {
+        if (getCenterPosition().getX() - STEP_SIZE/2 > 0 && isAlive && !isAnimating) {
             currentFrame = 3;
             move(new Vector2D(-1, 0));
             AudioEfx.frogJump.play(0.2);

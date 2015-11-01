@@ -32,15 +32,13 @@ public class ShortLog extends MovingEntity {
     public final static int LENGTH = STEP_SIZE * 3;
 
     public ShortLog(Vector2D pos, Vector2D v) {
-        super(Main.SPRITE_SHEET + "#shortlog");
-        position = pos;
+        super(Main.SPRITE_SHEET + "#shortlog", pos, v);
         Vector2D posSphere1 = position;
         Vector2D posSphere2 = new Vector2D(position.getX() + 32, position.getY());
         Vector2D posSphere3 = new Vector2D(position.getX() + 64, position.getY());
         collisionObjects.add(new CollisionObject("colSmall", posSphere1));
         collisionObjects.add(new CollisionObject("colSmall", posSphere2));
         collisionObjects.add(new CollisionObject("colSmall", posSphere3));
-        velocity = v;
         setVisibleFrame(v, 1, 0);
     }
 

@@ -37,7 +37,6 @@ public class Truck extends MovingEntity {
         Vector2D posSphere2 = new Vector2D(position.getX() + 32, position.getY());
         collisionObjects.add(new CollisionObject(posSphere1));
         collisionObjects.add(new CollisionObject(posSphere2));
-
         setVisibleFrame(v, 1, 0);
     }
 }
