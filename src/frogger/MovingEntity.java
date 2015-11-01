@@ -42,6 +42,8 @@ import java.util.List;
 public abstract class MovingEntity extends Body {
 
     static final int STEP_SIZE = 32;
+    static int steps = 0;
+    static int LENGTH = STEP_SIZE * steps;
 
     // List that holds collision spheres
     protected List<CollisionObject> collisionObjects;

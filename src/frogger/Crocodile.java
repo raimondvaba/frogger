@@ -29,7 +29,9 @@ import jig.engine.util.Vector2D;
 
 public class Crocodile extends MovingEntity {
 
-    public static int LENGTH = 32 * 3;
+    static {
+        steps = 3;
+    }
 
     private long animationDelay = 300;
     private long animationTime = 0;

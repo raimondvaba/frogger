@@ -4,7 +4,7 @@ import jig.engine.util.Vector2D;
 
 public class Frogger extends MovingEntity {
 
-    final static int MOVE_STEP = 32;
+    final static int MOVE_STEP = STEP_SIZE;
 
     final static private int ANIMATION_STEP = 4;
 

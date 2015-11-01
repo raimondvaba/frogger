@@ -31,10 +31,10 @@ import java.util.Random;
 
 public class MovingEntityFactory {
 
-    public static int CAR = 0;
-    public static int TRUCK = 1;
-    public static int SLOG = 2;
-    public static int LLOG = 3;
+    public static final int CAR = 0;
+    public static final int TRUCK = 1;
+    public static final int SLOG = 2;
+    public static final int LLOG = 3;
 
     public Vector2D position;
     public Vector2D velocity;
@@ -83,25 +83,22 @@ public class MovingEntityFactory {
         if (updateMs > rateMs) {
             updateMs = 0;
 
+            rateMs = creationRate[type];
+
             if (r.nextInt(100) < chance)
                 switch (type) {
-                    case 0: // CAR
-                        rateMs = creationRate[CAR];
+                    case CAR:
                         return new Car(position, velocity, r.nextInt(Car.TYPES));
-                    case 1: // TRUCK
-                        rateMs = creationRate[TRUCK];
+                    case TRUCK:
                         return new Truck(position, velocity);
-                    case 2: // SLOG
-                        rateMs = creationRate[SLOG];
+                    case SLOG:
                         return new ShortLog(position, velocity);
-                    case 3: // LLOG
-                        rateMs = creationRate[LLOG];
+                    case LLOG:
                         return new LongLog(position, velocity);
                     default:
                         return null;
                 }
         }
-
         return null;
     }
 
