@@ -43,10 +43,7 @@ public class ShortLog extends MovingEntity {
         collisionObjects.add(new CollisionObject("colSmall", posSphere2));
         collisionObjects.add(new CollisionObject("colSmall", posSphere3));
         velocity = v;
-        if (v.getX() < 0)
-            setFrame(1);
-        else
-            setFrame(0);
+        setVisibleFrame(v, 1, 0);
     }
 
 }

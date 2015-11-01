@@ -38,7 +38,6 @@ public class Car extends MovingEntity {
         position = pos;
         collisionObjects.add(new CollisionObject(position));
         velocity = v;
-        int index = v.getX() < 0 ? 1 : 0;
-        setFrame(index);
+        setVisibleFrame(v, 1, 0);
     }
 }

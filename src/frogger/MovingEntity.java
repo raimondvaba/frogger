@@ -42,17 +42,23 @@ import java.util.List;
 public abstract class MovingEntity extends Body {
 
     static final int STEP_SIZE = 32;
-    static int steps = 0;
-    static int LENGTH = STEP_SIZE * steps;
-
+    static int steps = 3;
+    static int LENGTH;
+    
     // List that holds collision spheres
     protected List<CollisionObject> collisionObjects;
 
     public MovingEntity(String name) {
         super(name);
         collisionObjects = new LinkedList<CollisionObject>();
+        LENGTH = STEP_SIZE * steps;
     }
-
+    protected void setVisibleFrame(Vector2D v, int a, int b)
+    {
+        int index = v.getX() < 0 ? a : b;
+        setFrame(index);
+    }
+    
     public List<CollisionObject> getCollisionObjects() {
         return collisionObjects;
     }

@@ -34,9 +34,6 @@ public class CopCar extends MovingEntity {
         position = pos;
         collisionObjects.add(new CollisionObject(position));
         velocity = v;
-        if (v.getX() < 0)
-            setFrame(1);
-        else
-            setFrame(0);
+        setVisibleFrame(v, 1, 0);
     }
 }

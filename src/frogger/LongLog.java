@@ -46,9 +46,6 @@ public class LongLog extends MovingEntity {
         collisionObjects.add(new CollisionObject("colSmall", posSphere4));
         velocity = v;
 
-        if (v.getX() < 0)
-            setFrame(1);
-        else
-            setFrame(0);
+        setVisibleFrame(v, 1, 0);
     }
 }
