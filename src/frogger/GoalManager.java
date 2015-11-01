@@ -64,8 +64,9 @@ public class GoalManager {
         // if (level < 3) {
         switch (level) {
             case 1:
-                goals.add(new Goal(new Vector2D(5 * 32, 32)));
-                goals.add(new Goal(new Vector2D(7 * 32, 32)));
+                for (int i = 5; i < 9; i += 2) {
+                    goals.add(new Goal(new Vector2D(i * MovingEntity.STEP_SIZE, MovingEntity.STEP_SIZE)));
+                }
                 break;
             case 2:
             default:
