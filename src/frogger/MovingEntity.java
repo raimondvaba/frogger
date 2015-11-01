@@ -78,7 +78,6 @@ public abstract class MovingEntity extends Body {
             Vector2D deltaPos = new Vector2D(position.getX() + (STEP_SIZE * i++), position.getY());
             a.setPosition(deltaPos);
         }
-
     }
 
     /**
