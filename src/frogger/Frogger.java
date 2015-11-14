@@ -4,6 +4,8 @@ import jig.engine.util.Vector2D;
 
 public class Frogger extends MovingEntity {
 
+    private static final double SOUND_DURATION = 0.2;
+
     final static int MOVE_STEP = SPRITE_SIZE;
 
     final static private int ANIMATION_STEP = 4;
@@ -48,10 +50,10 @@ public class Frogger extends MovingEntity {
     }
 
     public void moveLeft() {
-        if (getCenterPosition().getX() - SPRITE_SIZE/2 > 0 && isAlive && !isAnimating) {
+        if (getCenterPosition().getX() - SPRITE_SIZE / 2 > 0 && isAlive && !isAnimating) {
             currentFrame = 3;
             move(new Vector2D(-1, 0));
-            AudioEfx.frogJump.play(0.2);
+            AudioEfx.frogJump.play(SOUND_DURATION);
         }
     }
 
@@ -60,15 +62,15 @@ public class Frogger extends MovingEntity {
         if (getCenterPosition().getX() + SPRITE_SIZE < Main.WORLD_WIDTH && isAlive && !isAnimating) {
             currentFrame = 2;
             move(new Vector2D(1, 0));
-            AudioEfx.frogJump.play(0.2);
+            AudioEfx.frogJump.play(SOUND_DURATION);
         }
     }
 
     public void moveUp() {
-        if (position.getY() > 32 && isAlive && !isAnimating) {
+        if (position.getY() > MOVE_STEP && isAlive && !isAnimating) {
             currentFrame = 0;
             move(new Vector2D(0, -1));
-            AudioEfx.frogJump.play(0.2);
+            AudioEfx.frogJump.play(SOUND_DURATION);
         }
     }
 
@@ -76,7 +78,7 @@ public class Frogger extends MovingEntity {
         if (position.getY() < Main.WORLD_HEIGHT - MOVE_STEP && isAlive && !isAnimating) {
             currentFrame = 1;
             move(new Vector2D(0, 1));
-            AudioEfx.frogJump.play(0.2);
+            AudioEfx.frogJump.play(SOUND_DURATION);
         }
     }
 
@@ -122,15 +124,6 @@ public class Frogger extends MovingEntity {
         }
     }
 
-    public void allignXPositionToGrid() {
-        if (isAnimating || followObject != null)
-            return;
-        double x = position.getX();
-        x = Math.round(x / 32) * 32;
-        position = new Vector2D(x, position.getY());
-
-    }
-
     public void updateFollow(long deltaMs) {
         if (followObject == null || !isAlive)
             return;
@@ -171,7 +164,7 @@ public class Frogger extends MovingEntity {
             return;
 
         if (!cheating) {
-            AudioEfx.frogDie.play(0.2);
+            AudioEfx.frogDie.play(SOUND_DURATION);
             followObject = null;
             isAlive = false;
             currentFrame = 4; // dead sprite
@@ -189,7 +182,7 @@ public class Frogger extends MovingEntity {
             game.GameScore += 100;
             game.GameScore += game.levelTimer;
             if (g.isBonus) {
-                AudioEfx.bonus.play(0.2);
+                AudioEfx.bonus.play(SOUND_DURATION);
                 game.GameLives++;
             }
             g.reached();
