@@ -42,6 +42,7 @@ import jig.engine.audio.jsound.AudioStream;
  */
 public class AudioEfx {
 
+    private static final double SOUND_DURATION = 0.2;
     // These are referenced as to when to play the sound effects
     FroggerCollisionDetection fc;
     Frogger frog;
@@ -100,7 +101,7 @@ public class AudioEfx {
     }
 
     public void playGameMusic() {
-        gameMusic.loop(0.2, 0);
+        gameMusic.loop(SOUND_DURATION, 0);
     }
 
     public void playCompleteLevel() {
@@ -113,12 +114,12 @@ public class AudioEfx {
 
         if (deltaT > effectsDelay && fc.isOnRoad()) {
             deltaT = 0;
-            road_effects.get(rand.nextInt(road_effects.size())).play(0.2);
+            road_effects.get(rand.nextInt(road_effects.size())).play(SOUND_DURATION);
         }
 
         if (deltaT > effectsDelay && fc.isInRiver()) {
             deltaT = 0;
-            water_effects.get(rand.nextInt(road_effects.size())).play(0.2);
+            water_effects.get(rand.nextInt(road_effects.size())).play(SOUND_DURATION);
         }
     }
 
