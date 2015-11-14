@@ -57,7 +57,7 @@ public class WindGust {
      * Apply wind force to the Frogger, higher levels have higher wind drag
      * 
      * @param   frogger Frogger
-     * @param   level
+     * @param   level   the current level
      */
     public void perform(final Frogger frogger, final int level, final long deltaMs) {
         if (!frogger.isAlive) {
