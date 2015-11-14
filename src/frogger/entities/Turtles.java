@@ -23,8 +23,9 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package frogger;
+package frogger.entities;
 
+import frogger.Main;
 import jig.engine.util.Vector2D;
 
 /**
@@ -44,6 +45,10 @@ public class Turtles extends MovingEntity {
     private long underwaterPeriod = 1200;
 
     protected boolean isUnderwater = false;
+
+    public boolean isUnderwater() {
+        return isUnderwater;
+    }
 
     // Animation variables
     private boolean isAnimating = false;
@@ -119,7 +124,7 @@ public class Turtles extends MovingEntity {
     }
 
     /**
-     * Perform Animating sequence of submerging/floating based on abunch of
+     * Perform Animating sequence of submerging/floating based on a bunch of
      * local time variables at the top
      */
     public void animate() {
@@ -145,7 +150,6 @@ public class Turtles extends MovingEntity {
 
     /**
      * Initiate the animation by reseting the animation variables
-     * 
      * and flagging "isAnimationg"
      */
     public void startAnimation() {

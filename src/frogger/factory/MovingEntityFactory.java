@@ -23,11 +23,21 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package frogger;
+package frogger.factory;
 
 import jig.engine.util.Vector2D;
 
 import java.util.Random;
+
+import frogger.Main;
+import frogger.entities.Car;
+import frogger.entities.CopCar;
+import frogger.entities.Crocodile;
+import frogger.entities.LongLog;
+import frogger.entities.MovingEntity;
+import frogger.entities.ShortLog;
+import frogger.entities.Truck;
+import frogger.entities.Turtles;
 
 public class MovingEntityFactory {
 

@@ -23,18 +23,56 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package frogger;
+package frogger.entities;
 
+import frogger.CollisionObject;
+import frogger.Main;
 import jig.engine.util.Vector2D;
 
-public class Truck extends MovingEntity {
+public class Crocodile extends MovingEntity {
 
-    private final static int SIZE = 2;
+    public final static int SIZE = 4;
     public final static int LENGTH = SPRITE_SIZE * SIZE;
 
-    public Truck(Vector2D pos, Vector2D v) {
-        super(Main.SPRITE_SHEET + "#truck", pos, v);
+    private long animationDelay = 300;
+    private long animationTime = 0;
+    private int startFrame = 0;
+    private int nextFrame = 0;
+
+    protected CollisionObject head;
+
+    public CollisionObject getHead() {
+        return head;
+    }
+
+    public Crocodile(Vector2D pos, Vector2D v) {
+        super(Main.SPRITE_SHEET + "#crocodile", pos, v);
+
         addEntityCollisionObjects(SIZE);
-        setVisibleFrame(v, 1, 0);
+
+        if (v.getX() < 0) {
+            startFrame = 2;
+            head = collisionObjects.get(0);
+        } else {
+            startFrame = 0;
+            head = collisionObjects.get(3);
+        }
+
+        setFrame(startFrame);
+    }
+
+    public void animate(long deltaMs) {
+        animationTime += deltaMs;
+        if (animationTime > animationDelay) {
+            animationTime = 0;
+            nextFrame = (nextFrame + 1) % 2;
+            setFrame(nextFrame + startFrame);
+        }
+    }
+
+    @Override
+    public void update(final long deltaMs) {
+        super.update(deltaMs);
+        animate(deltaMs);
     }
 }

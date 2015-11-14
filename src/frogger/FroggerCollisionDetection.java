@@ -27,6 +27,15 @@ package frogger;
 
 import java.util.List;
 
+import frogger.entities.Car;
+import frogger.entities.CopCar;
+import frogger.entities.Crocodile;
+import frogger.entities.Frogger;
+import frogger.entities.LongLog;
+import frogger.entities.MovingEntity;
+import frogger.entities.ShortLog;
+import frogger.entities.Truck;
+import frogger.entities.Turtles;
 import jig.engine.physics.AbstractBodyLayer;
 import jig.engine.util.Vector2D;
 
@@ -134,7 +143,7 @@ public class FroggerCollisionDetection {
         }
 
         if (m instanceof Crocodile) {
-            if (s == ((Crocodile) m).head)
+            if (s == ((Crocodile) m).getHead())
                 frog.die();
             else
                 frog.follow(m);
@@ -146,7 +155,7 @@ public class FroggerCollisionDetection {
         }
 
         if (m instanceof Turtles) {
-            if (((Turtles) m).isUnderwater == true)
+            if (((Turtles) m).isUnderwater() == true)
                 frog.die();
             frog.follow(m);
         }

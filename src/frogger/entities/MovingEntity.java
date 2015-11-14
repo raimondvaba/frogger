@@ -23,13 +23,16 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package frogger;
+package frogger.entities;
 
 import jig.engine.physics.Body;
 import jig.engine.util.Vector2D;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import frogger.CollisionObject;
+import frogger.Main;
 
 /**
  * Abstract class for moving entities in the game
@@ -67,6 +70,11 @@ public abstract class MovingEntity extends Body {
         return collisionObjects;
     }
     
+    /**
+     * 
+     * 
+     * @param size - amount of objects to add
+     */
     protected void addEntityCollisionObjects(final int size) {
         for (int i = 0; i < size; i++) {
             Vector2D posSphere = new Vector2D(position.getX() + SPRITE_SIZE * i, position.getY());

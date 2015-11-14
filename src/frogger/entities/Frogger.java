@@ -1,5 +1,9 @@
-package frogger;
+package frogger.entities;
 
+import frogger.AudioEfx;
+import frogger.CollisionObject;
+import frogger.Goal;
+import frogger.Main;
 import jig.engine.util.Vector2D;
 
 public class Frogger extends MovingEntity {

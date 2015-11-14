@@ -29,6 +29,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import frogger.entities.MovingEntity;
 import jig.engine.util.Vector2D;
 
 public class GoalManager {

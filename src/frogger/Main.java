@@ -26,6 +26,10 @@
 package frogger;
 
 import java.awt.event.KeyEvent;
+
+import frogger.entities.Frogger;
+import frogger.entities.MovingEntity;
+import frogger.factory.MovingEntityFactory;
 import jig.engine.ImageResource;
 import jig.engine.PaintableCanvas;
 import jig.engine.RenderingContext;
@@ -40,16 +44,16 @@ public class Main extends StaticScreenGame {
     private static final int HEIGHT = 14;
     private static final int WIDTH = 13;
     static final int SPRITE_SIZE = 32;
-    static final int WORLD_WIDTH = WIDTH * SPRITE_SIZE;
-    static final int WORLD_HEIGHT = HEIGHT * SPRITE_SIZE;
-    static final Vector2D FROGGER_START = new Vector2D(6 * SPRITE_SIZE, WORLD_HEIGHT - SPRITE_SIZE);
+    public static final int WORLD_WIDTH = WIDTH * SPRITE_SIZE;
+    public static final int WORLD_HEIGHT = HEIGHT * SPRITE_SIZE;
+    public static final Vector2D FROGGER_START = new Vector2D(6 * SPRITE_SIZE, WORLD_HEIGHT - SPRITE_SIZE);
 
     static final String RSC_PATH = "resources/";
-    static final String SPRITE_SHEET = RSC_PATH + "frogger_sprites.png";
+    public static final String SPRITE_SHEET = RSC_PATH + "frogger_sprites.png";
 
     static final int FROGGER_LIVES = 5;
     static final int STARTING_LEVEL = 1;
-    static final int DEFAULT_LEVEL_TIME = 60;
+    public static final int DEFAULT_LEVEL_TIME = 60;
 
     private FroggerCollisionDetection frogCol;
     private Frogger frog;

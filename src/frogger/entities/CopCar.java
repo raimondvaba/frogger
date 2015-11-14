@@ -23,8 +23,9 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package frogger;
+package frogger.entities;
 
+import frogger.Main;
 import jig.engine.util.Vector2D;
 
 public class CopCar extends MovingEntity {

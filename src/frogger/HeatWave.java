@@ -27,6 +27,9 @@ package frogger;
 
 import java.util.Random;
 
+import frogger.entities.Frogger;
+import frogger.entities.MovingEntity;
+import frogger.entities.Particle;
 import jig.engine.util.Vector2D;
 
 public class HeatWave {

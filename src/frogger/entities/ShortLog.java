@@ -23,18 +23,20 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package frogger;
+package frogger.entities;
 
+import frogger.Main;
 import jig.engine.util.Vector2D;
 
-public class LongLog extends MovingEntity {
+public class ShortLog extends MovingEntity {
 
-    public final static int SIZE = 4;
+    public final static int SIZE = 3;
     public final static int LENGTH = SPRITE_SIZE * SIZE;
 
-    public LongLog(Vector2D pos, Vector2D v) {
-        super(Main.SPRITE_SHEET + "#longlog", pos, v);
+    public ShortLog(Vector2D pos, Vector2D v) {
+        super(Main.SPRITE_SHEET + "#shortlog", pos, v);
         addEntityCollisionObjects(SIZE);
         setVisibleFrame(v, 1, 0);
     }
+
 }

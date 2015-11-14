@@ -27,6 +27,9 @@ package frogger;
 
 import java.util.List;
 import java.util.Random;
+
+import frogger.entities.Frogger;
+
 import java.util.LinkedList;
 
 import jig.engine.ResourceFactory;
