@@ -101,8 +101,8 @@ public class Turtles extends MovingEntity {
     public void init(Vector2D pos, Vector2D v) {
         position = pos;
         Vector2D posSphere1 = position;
-        Vector2D posSphere2 = new Vector2D(position.getX() + STEP_SIZE, position.getY());
-        Vector2D posSphere3 = new Vector2D(position.getX() + 2 * STEP_SIZE, position.getY());
+        Vector2D posSphere2 = new Vector2D(position.getX() + SPRITE_SIZE, position.getY());
+        Vector2D posSphere3 = new Vector2D(position.getX() + 2 * SPRITE_SIZE, position.getY());
         collisionObjects.add(new CollisionObject("colSmall", posSphere1));
         collisionObjects.add(new CollisionObject("colSmall", posSphere2));
         collisionObjects.add(new CollisionObject("colSmall", posSphere3));

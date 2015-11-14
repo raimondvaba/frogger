@@ -4,7 +4,7 @@ import jig.engine.util.Vector2D;
 
 public class Frogger extends MovingEntity {
 
-    final static int MOVE_STEP = STEP_SIZE;
+    final static int MOVE_STEP = SPRITE_SIZE;
 
     final static private int ANIMATION_STEP = 4;
 
@@ -48,7 +48,7 @@ public class Frogger extends MovingEntity {
     }
 
     public void moveLeft() {
-        if (getCenterPosition().getX() - STEP_SIZE/2 > 0 && isAlive && !isAnimating) {
+        if (getCenterPosition().getX() - SPRITE_SIZE/2 > 0 && isAlive && !isAnimating) {
             currentFrame = 3;
             move(new Vector2D(-1, 0));
             AudioEfx.frogJump.play(0.2);
@@ -57,7 +57,7 @@ public class Frogger extends MovingEntity {
 
     public void moveRight() {
 
-        if (getCenterPosition().getX() + STEP_SIZE < Main.WORLD_WIDTH && isAlive && !isAnimating) {
+        if (getCenterPosition().getX() + SPRITE_SIZE < Main.WORLD_WIDTH && isAlive && !isAnimating) {
             currentFrame = 2;
             move(new Vector2D(1, 0));
             AudioEfx.frogJump.play(0.2);

@@ -41,7 +41,7 @@ import java.util.List;
  */
 public abstract class MovingEntity extends Body {
 
-    public static final int STEP_SIZE = 32;
+    public static final int SPRITE_SIZE = 32;
 
     // List that holds collision spheres
     protected List<CollisionObject> collisionObjects;
@@ -75,7 +75,7 @@ public abstract class MovingEntity extends Body {
     public void sync(Vector2D position) {
         int i = 0;
         for (CollisionObject a : collisionObjects) {
-            Vector2D deltaPos = new Vector2D(position.getX() + (STEP_SIZE * i++), position.getY());
+            Vector2D deltaPos = new Vector2D(position.getX() + (SPRITE_SIZE * i++), position.getY());
             a.setPosition(deltaPos);
         }
     }
@@ -89,7 +89,7 @@ public abstract class MovingEntity extends Body {
      * detection) travel in y-axis
      */
     public void update(final long deltaMs) {
-        if (position.getX() > Main.WORLD_WIDTH + width || position.getX() < -(STEP_SIZE * 4))
+        if (position.getX() > Main.WORLD_WIDTH + width || position.getX() < -(SPRITE_SIZE * 4))
             setActivation(false);
 
         position = new Vector2D(position.getX() + velocity.getX() * deltaMs,

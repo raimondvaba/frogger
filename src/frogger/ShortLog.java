@@ -29,13 +29,13 @@ import jig.engine.util.Vector2D;
 
 public class ShortLog extends MovingEntity {
 
-    public final static int STEPS = 3;
-    public final static int LENGTH = STEP_SIZE * STEPS;
+    public final static int SIZE = 3;
+    public final static int LENGTH = SPRITE_SIZE * SIZE;
 
     public ShortLog(Vector2D pos, Vector2D v) {
         super(Main.SPRITE_SHEET + "#shortlog", pos, v);
-        for (int i = 0; i < STEPS; i++) {
-            Vector2D posSphere = new Vector2D(position.getX() + STEP_SIZE * i, position.getY());
+        for (int i = 0; i < SIZE; i++) {
+            Vector2D posSphere = new Vector2D(position.getX() + SPRITE_SIZE * i, position.getY());
             collisionObjects.add(new CollisionObject("colSmall", posSphere));
         }
         setVisibleFrame(v, 1, 0);

@@ -65,13 +65,13 @@ public class GoalManager {
         switch (level) {
             case 1:
                 for (int i = 5; i < 9; i += 2) {
-                    goals.add(new Goal(new Vector2D(i * MovingEntity.STEP_SIZE, MovingEntity.STEP_SIZE)));
+                    goals.add(new Goal(new Vector2D(i * MovingEntity.SPRITE_SIZE, MovingEntity.SPRITE_SIZE)));
                 }
                 break;
             case 2:
             default:
                 for (int i = 3; i < 11; i += 2) {
-                    goals.add(new Goal(new Vector2D(i * MovingEntity.STEP_SIZE, MovingEntity.STEP_SIZE)));
+                    goals.add(new Goal(new Vector2D(i * MovingEntity.SPRITE_SIZE, MovingEntity.SPRITE_SIZE)));
                 }
                 break;
         }
