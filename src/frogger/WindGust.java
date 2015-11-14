@@ -32,15 +32,15 @@ import jig.engine.util.Vector2D;
 /**
  * Generating the Wind effect in Frogger
  * 
- * @author vitaliy
+ * @author  vitaliy
  *
  */
 public class WindGust {
 
-    final static int PERIOD = 5000; // milliseconds
-    final static int DURATION = 3000; // milliseconds
+    private final static int PERIOD_MS = 5000;
+    private final static int DURATION_MS = 3000;
 
-    Random r;
+    private final Random r;
 
     private long timeMs;
     private long durationMs;
@@ -56,19 +56,18 @@ public class WindGust {
     /**
      * Apply wind force to the Frogger, higher levels have higher wind drag
      * 
-     * @param f
-     *            - Frogger
-     * @param level
+     * @param   frogger Frogger
+     * @param   level
      */
-    public void perform(Frogger f, int level, final long deltaMs) {
-        if (!f.isAlive) {
+    public void perform(final Frogger frogger, final int level, final long deltaMs) {
+        if (!frogger.isAlive) {
             isWindy = false;
             return;
         }
 
-        if (isWindy && durationMs < DURATION) {
+        if (isWindy && durationMs < DURATION_MS) {
             double vPos = deltaMs * r.nextDouble() * (0.01 * level);
-            f.windReposition(new Vector2D(vPos, 0));
+            frogger.windReposition(new Vector2D(vPos, 0));
         } else {
             isWindy = false;
         }
@@ -77,12 +76,11 @@ public class WindGust {
     /**
      * Initiate Wind effect
      * 
-     * @param level
-     *            - current game level
+     * @param   level   current game level
      */
     public void start(final int level) {
 
-        if (!isWindy && timeMs > PERIOD) {
+        if (!isWindy && timeMs > PERIOD_MS) {
 
             if (r.nextInt(100) < level * 10) {
                 durationMs = 1;
@@ -98,8 +96,8 @@ public class WindGust {
     /**
      * Wind particle generator
      * 
-     * @param level
-     * @return - a wind particle object or null
+     * @param   level
+     * @return  a wind particle object or null
      */
     public MovingEntity genParticles(final int level) {
 
