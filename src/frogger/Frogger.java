@@ -4,6 +4,8 @@ import jig.engine.util.Vector2D;
 
 public class Frogger extends MovingEntity {
 
+    private static final int ONE_SECOND_MS = 1000;
+
     private static final double SOUND_DURATION = 0.2;
 
     final static int MOVE_STEP = SPRITE_SIZE;
@@ -196,7 +198,7 @@ public class Frogger extends MovingEntity {
         if (game.GameLives <= 0)
             return;
 
-        if (!isAlive && timeOfDeath + 2000 < System.currentTimeMillis())
+        if (!isAlive && timeOfDeath + 2 * ONE_SECOND_MS < System.currentTimeMillis())
             resetFrog();
 
         updateAnimation();
@@ -205,7 +207,7 @@ public class Frogger extends MovingEntity {
 
         // Level timer stuff
         deltaTime += deltaMs;
-        if (deltaTime > 1000) {
+        if (deltaTime > ONE_SECOND_MS) {
             deltaTime = 0;
             game.levelTimer--;
         }
