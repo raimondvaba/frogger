@@ -35,6 +35,7 @@ public class MovingEntityFactory {
     public static final int TRUCK = 1;
     public static final int SLOG = 2;
     public static final int LLOG = 3;
+    public static final int STEP_SIZE = 32;
 
     public Vector2D position;
     public Vector2D velocity;
@@ -63,10 +64,10 @@ public class MovingEntityFactory {
         velocity = v;
         r = new Random(System.currentTimeMillis());
 
-        creationRate[CAR] = (int) Math.round(((Car.LENGTH) + padding + 32) / Math.abs(velocity.getX()));
-        creationRate[TRUCK] = (int) Math.round(((Truck.LENGTH) + padding + 32) / Math.abs(velocity.getX()));
-        creationRate[SLOG] = (int) Math.round(((ShortLog.LENGTH) + padding - 32) / Math.abs(velocity.getX()));
-        creationRate[LLOG] = (int) Math.round(((LongLog.LENGTH) + padding - 32) / Math.abs(velocity.getX()));
+        creationRate[CAR] = (int) Math.round(((Car.LENGTH) + padding + STEP_SIZE) / Math.abs(velocity.getX()));
+        creationRate[TRUCK] = (int) Math.round(((Truck.LENGTH) + padding + STEP_SIZE) / Math.abs(velocity.getX()));
+        creationRate[SLOG] = (int) Math.round(((ShortLog.LENGTH) + padding - STEP_SIZE) / Math.abs(velocity.getX()));
+        creationRate[LLOG] = (int) Math.round(((LongLog.LENGTH) + padding - STEP_SIZE) / Math.abs(velocity.getX()));
     }
 
     /**

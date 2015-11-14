@@ -40,5 +40,4 @@ public class ShortLog extends MovingEntity {
         }
         setVisibleFrame(v, 1, 0);
     }
-
 }
