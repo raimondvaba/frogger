@@ -32,14 +32,15 @@ import jig.engine.util.Vector2D;
 
 public class FroggerCollisionDetection {
 
+    public static final int STEP_SIZE = 32;
     public Frogger frog;
     public CollisionObject frogSphere;
 
     // River and Road bounds, all we care about is Y axis in this game
-    public int river_y0 = 1 * 32;
-    public int river_y1 = river_y0 + 6 * 32;
-    public int road_y0 = 8 * 32;
-    public int road_y1 = road_y0 + 5 * 32;
+    public int riverVerticalStart = 1 * STEP_SIZE;
+    public int riverVerticalEnd = riverVerticalStart + 6 * STEP_SIZE;
+    public int roadVerticalStart = 8 * STEP_SIZE;
+    public int roadVerticalEnd = roadVerticalStart + 5 * STEP_SIZE;
 
     public FroggerCollisionDetection(Frogger f) {
         frog = f;
@@ -91,7 +92,7 @@ public class FroggerCollisionDetection {
      */
     public boolean isOutOfBounds() {
         Vector2D frogPos = frogSphere.getCenterPosition();
-        if (frogPos.getY() < 32 || frogPos.getY() > Main.WORLD_HEIGHT)
+        if (frogPos.getY() < STEP_SIZE || frogPos.getY() > Main.WORLD_HEIGHT)
             return true;
         if (frogPos.getX() < 0 || frogPos.getX() > Main.WORLD_WIDTH)
             return true;
@@ -106,7 +107,7 @@ public class FroggerCollisionDetection {
     public boolean isInRiver() {
         Vector2D frogPos = frogSphere.getCenterPosition();
 
-        if (frogPos.getY() > river_y0 && frogPos.getY() < river_y1)
+        if (frogPos.getY() > riverVerticalStart && frogPos.getY() < riverVerticalEnd)
             return true;
 
         return false;
@@ -120,7 +121,7 @@ public class FroggerCollisionDetection {
     public boolean isOnRoad() {
         Vector2D frogPos = frogSphere.getCenterPosition();
 
-        if (frogPos.getY() > road_y0 && frogPos.getY() < road_y1)
+        if (frogPos.getY() > roadVerticalStart && frogPos.getY() < roadVerticalEnd)
             return true;
 
         return false;

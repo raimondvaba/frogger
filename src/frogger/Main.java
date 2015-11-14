@@ -37,9 +37,10 @@ import jig.engine.physics.AbstractBodyLayer;
 import jig.engine.util.Vector2D;
 
 public class Main extends StaticScreenGame {
-    static final int WORLD_WIDTH = (13 * 32);
-    static final int WORLD_HEIGHT = (14 * 32);
-    static final Vector2D FROGGER_START = new Vector2D(6 * 32, WORLD_HEIGHT - 32);
+    static final int STEP_SIZE = 32;
+    static final int WORLD_WIDTH = (13 * STEP_SIZE);
+    static final int WORLD_HEIGHT = (14 * STEP_SIZE);
+    static final Vector2D FROGGER_START = new Vector2D(6 * STEP_SIZE, WORLD_HEIGHT - STEP_SIZE);
 
     static final String RSC_PATH = "resources/";
     static final String SPRITE_SHEET = RSC_PATH + "frogger_sprites.png";
@@ -137,26 +138,26 @@ public class Main extends StaticScreenGame {
         movingObjectsLayer.clear();
 
         /* River Traffic */
-        riverLine1 = new MovingEntityFactory(new Vector2D(-(32 * 3), 2 * 32), new Vector2D(0.06 * dV, 0));
+        riverLine1 = new MovingEntityFactory(new Vector2D(-(STEP_SIZE * 3), 2 * STEP_SIZE), new Vector2D(0.06 * dV, 0));
 
-        riverLine2 = new MovingEntityFactory(new Vector2D(Main.WORLD_WIDTH, 3 * 32), new Vector2D(-0.04 * dV, 0));
+        riverLine2 = new MovingEntityFactory(new Vector2D(Main.WORLD_WIDTH, 3 * STEP_SIZE), new Vector2D(-0.04 * dV, 0));
 
-        riverLine3 = new MovingEntityFactory(new Vector2D(-(32 * 3), 4 * 32), new Vector2D(0.09 * dV, 0));
+        riverLine3 = new MovingEntityFactory(new Vector2D(-(STEP_SIZE * 3), 4 * STEP_SIZE), new Vector2D(0.09 * dV, 0));
 
-        riverLine4 = new MovingEntityFactory(new Vector2D(-(32 * 4), 5 * 32), new Vector2D(0.045 * dV, 0));
+        riverLine4 = new MovingEntityFactory(new Vector2D(-(STEP_SIZE * 4), 5 * STEP_SIZE), new Vector2D(0.045 * dV, 0));
 
-        riverLine5 = new MovingEntityFactory(new Vector2D(Main.WORLD_WIDTH, 6 * 32), new Vector2D(-0.045 * dV, 0));
+        riverLine5 = new MovingEntityFactory(new Vector2D(Main.WORLD_WIDTH, 6 * STEP_SIZE), new Vector2D(-0.045 * dV, 0));
 
         /* Road Traffic */
-        roadLine1 = new MovingEntityFactory(new Vector2D(Main.WORLD_WIDTH, 8 * 32), new Vector2D(-0.1 * dV, 0));
+        roadLine1 = new MovingEntityFactory(new Vector2D(Main.WORLD_WIDTH, 8 * STEP_SIZE), new Vector2D(-0.1 * dV, 0));
 
-        roadLine2 = new MovingEntityFactory(new Vector2D(-(32 * 4), 9 * 32), new Vector2D(0.08 * dV, 0));
+        roadLine2 = new MovingEntityFactory(new Vector2D(-(STEP_SIZE * 4), 9 * STEP_SIZE), new Vector2D(0.08 * dV, 0));
 
-        roadLine3 = new MovingEntityFactory(new Vector2D(Main.WORLD_WIDTH, 10 * 32), new Vector2D(-0.12 * dV, 0));
+        roadLine3 = new MovingEntityFactory(new Vector2D(Main.WORLD_WIDTH, 10 * STEP_SIZE), new Vector2D(-0.12 * dV, 0));
 
-        roadLine4 = new MovingEntityFactory(new Vector2D(-(32 * 4), 11 * 32), new Vector2D(0.075 * dV, 0));
+        roadLine4 = new MovingEntityFactory(new Vector2D(-(STEP_SIZE * 4), 11 * STEP_SIZE), new Vector2D(0.075 * dV, 0));
 
-        roadLine5 = new MovingEntityFactory(new Vector2D(Main.WORLD_WIDTH, 12 * 32), new Vector2D(-0.05 * dV, 0));
+        roadLine5 = new MovingEntityFactory(new Vector2D(Main.WORLD_WIDTH, 12 * STEP_SIZE), new Vector2D(-0.05 * dV, 0));
 
         goalmanager.init(level);
         for (Goal g : goalmanager.get()) {
