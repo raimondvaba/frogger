@@ -66,6 +66,13 @@ public abstract class MovingEntity extends Body {
     public List<CollisionObject> getCollisionObjects() {
         return collisionObjects;
     }
+    
+    protected void addEntityCollisionObjects(final int size) {
+        for (int i = 0; i < size; i++) {
+            Vector2D posSphere = new Vector2D(position.getX() + SPRITE_SIZE * i, position.getY());
+            collisionObjects.add(new CollisionObject("colSmall", posSphere));
+        }
+    }
 
     /**
      * Updates the collision spheres with new position

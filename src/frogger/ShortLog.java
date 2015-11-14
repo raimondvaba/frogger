@@ -34,10 +34,8 @@ public class ShortLog extends MovingEntity {
 
     public ShortLog(Vector2D pos, Vector2D v) {
         super(Main.SPRITE_SHEET + "#shortlog", pos, v);
-        for (int i = 0; i < SIZE; i++) {
-            Vector2D posSphere = new Vector2D(position.getX() + SPRITE_SIZE * i, position.getY());
-            collisionObjects.add(new CollisionObject("colSmall", posSphere));
-        }
+        addEntityCollisionObjects(SIZE);
         setVisibleFrame(v, 1, 0);
     }
+
 }

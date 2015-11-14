@@ -29,15 +29,12 @@ import jig.engine.util.Vector2D;
 
 public class LongLog extends MovingEntity {
 
-    public final static int STEPS = 4;
-    public final static int LENGTH = SPRITE_SIZE * STEPS;
+    public final static int SIZE = 4;
+    public final static int LENGTH = SPRITE_SIZE * SIZE;
 
     public LongLog(Vector2D pos, Vector2D v) {
         super(Main.SPRITE_SHEET + "#longlog", pos, v);
-        for (int i = 0; i < STEPS; i++) {
-            Vector2D posSphere = new Vector2D(position.getX() + SPRITE_SIZE * i, position.getY());
-            collisionObjects.add(new CollisionObject("colSmall", posSphere));
-        }
+        addEntityCollisionObjects(SIZE);
         setVisibleFrame(v, 1, 0);
     }
 }

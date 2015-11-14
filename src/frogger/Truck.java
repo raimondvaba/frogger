@@ -29,14 +29,12 @@ import jig.engine.util.Vector2D;
 
 public class Truck extends MovingEntity {
 
-    public final static int LENGTH = SPRITE_SIZE * 2;
+    private final static int SIZE = 2;
+    public final static int LENGTH = SPRITE_SIZE * SIZE;
 
     public Truck(Vector2D pos, Vector2D v) {
         super(Main.SPRITE_SHEET + "#truck", pos, v);
-        Vector2D posSphere1 = position;
-        Vector2D posSphere2 = new Vector2D(position.getX() + 32, position.getY());
-        collisionObjects.add(new CollisionObject(posSphere1));
-        collisionObjects.add(new CollisionObject(posSphere2));
+        addEntityCollisionObjects(SIZE);
         setVisibleFrame(v, 1, 0);
     }
 }

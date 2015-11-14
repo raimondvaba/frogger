@@ -30,8 +30,8 @@ import java.util.Random;
 import jig.engine.util.Vector2D;
 
 public class HeatWave {
-    final static int PERIOD = 2000; // milliseconds
-    final static int DURATION = 1000; // milliseconds
+    final static int PERIOD_MS = 2000;
+    final static int DURATION_MS = 1000;
 
     Random r;
 
@@ -61,7 +61,7 @@ public class HeatWave {
             return;
         }
 
-        if (isHot && durationMs > (DURATION - (level * 10)) && !f.hw_hasMoved) {
+        if (isHot && durationMs > (DURATION_MS - (level * 10)) && !f.hw_hasMoved) {
             f.randomJump(r.nextInt(4));
             isHot = false;
         }
@@ -79,7 +79,7 @@ public class HeatWave {
      */
     public void start(Frogger f, final int GameLevel) {
 
-        if (!isHot && timeMs > PERIOD) {
+        if (!isHot && timeMs > PERIOD_MS) {
             if (r.nextInt(100) < GameLevel * 10) {
                 durationMs = 1;
                 isHot = true;

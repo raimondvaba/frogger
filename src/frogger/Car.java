@@ -30,11 +30,12 @@ import jig.engine.util.Vector2D;
 public class Car extends MovingEntity {
 
     public final static int TYPES = 3;
-    public final static int LENGTH = SPRITE_SIZE;
+    private final static int SIZE = 1;
+    public final static int LENGTH = SPRITE_SIZE * SIZE;
 
     public Car(Vector2D pos, Vector2D v, int randId) {
         super(Main.SPRITE_SHEET + "#car" + randId, pos, v);
-        collisionObjects.add(new CollisionObject(position));
+        addEntityCollisionObjects(SIZE);
         setVisibleFrame(v, 1, 0);
     }
 
