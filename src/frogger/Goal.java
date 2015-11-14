@@ -54,15 +54,12 @@ public class Goal extends MovingEntity {
     }
 
     public void setBonus(boolean b) {
-        if (b) {
-            isBonus = true;
-            setFrame(2);
-        } else {
-            isBonus = false;
-            setFrame(0);
-        }
+        isBonus = b;
+        int frame = (b ? 2 : 0);
+        setFrame(frame);
     }
 
     @Override
-    public void update(long deltaMs) {}
+    public void update(long deltaMs) {
+    }
 }
