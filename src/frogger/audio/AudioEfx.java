@@ -25,60 +25,62 @@
 
 package frogger.audio;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 import frogger.Main;
 import frogger.collision.FroggerCollisionDetection;
 import frogger.entities.Frogger;
-
-import java.util.LinkedList;
-
 import jig.engine.ResourceFactory;
 import jig.engine.audio.AudioState;
 import jig.engine.audio.jsound.AudioClip;
 import jig.engine.audio.jsound.AudioStream;
 
 /**
- * Controls the audio effects pedekad, yoyo
+ * Controls the audio effects
  * 
  * @author vitaliy
  *
  */
 public class AudioEfx {
 
-    private static final double SOUND_DURATION = 0.2;
+    private static final ResourceFactory FACTORY = ResourceFactory.getFactory();
+    private static final double LEVEL_COMPLETE_SOUND_DURATION_SEC = 2.0;
+    private static final double SOUND_DURATION_SEC = 0.2;
+
     // These are referenced as to when to play the sound effects
     FroggerCollisionDetection fc;
     Frogger frog;
 
-    public Random rand = new Random(System.currentTimeMillis());
+    public Random random = new Random(System.currentTimeMillis());
 
     // Background music
     private AudioStream gameMusic;
 
-    public static final String A_FX_PATH = Main.RSC_PATH + "ambient_fx/";
+    private static final String A_FX_PATH = Main.RSC_PATH + "ambient_fx/";
 
-    public static AudioClip frogJump = ResourceFactory.getFactory().getAudioClip(Main.RSC_PATH + "jump.wav");
+    public static AudioClip frogJump = FACTORY.getAudioClip(Main.RSC_PATH + "jump.wav");
 
-    public static AudioClip frogDie = ResourceFactory.getFactory().getAudioClip(Main.RSC_PATH + "frog_die.ogg");
+    public static AudioClip frogDie = FACTORY.getAudioClip(Main.RSC_PATH + "frog_die.ogg");
 
-    public static AudioClip frogGoal = ResourceFactory.getFactory().getAudioClip(Main.RSC_PATH + "goal.ogg");
+    public static AudioClip frogGoal = FACTORY.getAudioClip(Main.RSC_PATH + "goal.ogg");
 
-    public static AudioClip levelGoal = ResourceFactory.getFactory().getAudioClip(Main.RSC_PATH + "level_goal.ogg");
+    public static AudioClip levelGoal = FACTORY.getAudioClip(Main.RSC_PATH + "level_goal.ogg");
 
-    public static AudioClip wind = ResourceFactory.getFactory().getAudioClip(Main.RSC_PATH + "wind.ogg");
+    public static AudioClip wind = FACTORY.getAudioClip(Main.RSC_PATH + "wind.ogg");
 
-    public static AudioClip heat = ResourceFactory.getFactory().getAudioClip(Main.RSC_PATH + "match.ogg");
+    public static AudioClip heat = FACTORY.getAudioClip(Main.RSC_PATH + "match.ogg");
 
-    public static AudioClip bonus = ResourceFactory.getFactory().getAudioClip(Main.RSC_PATH + "bonus.ogg");
+    public static AudioClip bonus = FACTORY.getAudioClip(Main.RSC_PATH + "bonus.ogg");
 
-    public static AudioClip siren = ResourceFactory.getFactory().getAudioClip(A_FX_PATH + "siren.ogg");
+    public static AudioClip siren = FACTORY.getAudioClip(A_FX_PATH + "siren.ogg");
 
     // one effect is randomly picked from road_effects or water_effects every
     // couple of seconds
-    private List<AudioClip> road_effects = new LinkedList<AudioClip>();
-    private List<AudioClip> water_effects = new LinkedList<AudioClip>();
+    private List<AudioClip> roadEffects = new ArrayList<AudioClip>();
+    private List<AudioClip> waterEffects = new ArrayList<AudioClip>();
 
     private int effectsDelay = 3000;
     private int deltaT = 0;
@@ -87,54 +89,59 @@ public class AudioEfx {
      * In order to know when to play-back certain effects, we track the state of
      * collision detector and Frogger
      * 
-     * @param f
-     * @param frg
+     * @param collisionDetection
+     * @param frogger
      */
-    public AudioEfx(FroggerCollisionDetection f, Frogger frg) {
-        fc = f;
-        frog = frg;
+    public AudioEfx(FroggerCollisionDetection collisionDetection, Frogger frogger) {
+        fc = collisionDetection;
+        frog = frogger;
 
-        road_effects.add(ResourceFactory.getFactory().getAudioClip(A_FX_PATH + "long-horn.ogg"));
-        road_effects.add(ResourceFactory.getFactory().getAudioClip(A_FX_PATH + "car-pass.ogg"));
-        road_effects.add(ResourceFactory.getFactory().getAudioClip(A_FX_PATH + "siren.ogg"));
+        ResourceFactory resourceFactory = FACTORY;
 
-        water_effects.add(ResourceFactory.getFactory().getAudioClip(A_FX_PATH + "water-splash.ogg"));
-        water_effects.add(ResourceFactory.getFactory().getAudioClip(A_FX_PATH + "splash.ogg"));
-        water_effects.add(ResourceFactory.getFactory().getAudioClip(A_FX_PATH + "frog.ogg"));
+        roadEffects.addAll(Arrays.asList(resourceFactory.getAudioClip(A_FX_PATH + "long-horn.ogg"),
+                resourceFactory.getAudioClip(A_FX_PATH + "car-pass.ogg"),
+                resourceFactory.getAudioClip(A_FX_PATH + "siren.ogg")));
+
+        waterEffects.addAll(Arrays.asList(resourceFactory.getAudioClip(A_FX_PATH + "water-splash.ogg"),
+                resourceFactory.getAudioClip(A_FX_PATH + "splash.ogg"),
+                resourceFactory.getAudioClip(A_FX_PATH + "frog.ogg")));
 
         gameMusic = new AudioStream(Main.RSC_PATH + "bg_music.ogg");
     }
 
     public void playGameMusic() {
-        gameMusic.loop(SOUND_DURATION, 0);
+        gameMusic.loop(SOUND_DURATION_SEC, 0);
     }
 
     public void playCompleteLevel() {
         gameMusic.pause();
-        levelGoal.play(2.0);
+        levelGoal.play(LEVEL_COMPLETE_SOUND_DURATION_SEC);
     }
 
     public void playRandomAmbientSound(final long deltaMs) {
         deltaT += deltaMs;
 
-        if (deltaT > effectsDelay && fc.isOnRoad()) {
-            deltaT = 0;
-            road_effects.get(rand.nextInt(road_effects.size())).play(SOUND_DURATION);
+        if (deltaT > effectsDelay) {
+            List<AudioClip> effects = null;
+            if (fc.isOnRoad()) {
+                effects = roadEffects;
+            } else if (fc.isInRiver()) {
+                effects = waterEffects;
+            }
+            if (effects != null) {
+                deltaT = 0;
+                effects.get(random.nextInt(effects.size())).play(SOUND_DURATION_SEC);
+            }
         }
 
-        if (deltaT > effectsDelay && fc.isInRiver()) {
-            deltaT = 0;
-            water_effects.get(rand.nextInt(road_effects.size())).play(SOUND_DURATION);
-        }
     }
 
     public void update(final long deltaMs) {
         playRandomAmbientSound(deltaMs);
 
-        if (frog.isAlive && (gameMusic.getState() == AudioState.PAUSED))
+        if (frog.isAlive && gameMusic.getState() == AudioState.PAUSED)
             gameMusic.resume();
-
-        if (!frog.isAlive && (gameMusic.getState() == AudioState.PLAYING))
+        else if (!frog.isAlive && gameMusic.getState() == AudioState.PLAYING)
             gameMusic.pause();
 
     }

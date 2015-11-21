@@ -32,10 +32,10 @@ public class CopCar extends MovingEntity {
     
     private final static int SIZE = 1;
 
-    public CopCar(Vector2D pos, Vector2D v) {
-        super(Main.SPRITE_SHEET + "#copcar", pos, v);
+    public CopCar(Vector2D pos, Vector2D velocity) {
+        super(Main.SPRITE_SHEET + "#copcar", pos, velocity);
         addEntityCollisionObjects(SIZE);
-        setVisibleFrame(v, 1, 0);
+        setVisibleFrame(velocity, 1, 0);
     }
 
 }

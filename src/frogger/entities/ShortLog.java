@@ -33,10 +33,10 @@ public class ShortLog extends MovingEntity {
     public final static int SIZE = 3;
     public final static int LENGTH = SPRITE_SIZE * SIZE;
 
-    public ShortLog(Vector2D pos, Vector2D v) {
-        super(Main.SPRITE_SHEET + "#shortlog", pos, v);
+    public ShortLog(Vector2D pos, Vector2D velocity) {
+        super(Main.SPRITE_SHEET + "#shortlog", pos, velocity);
         addEntityCollisionObjects(SIZE);
-        setVisibleFrame(v, 1, 0);
+        setVisibleFrame(velocity, 1, 0);
     }
 
 }

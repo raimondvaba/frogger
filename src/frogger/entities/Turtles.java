@@ -55,7 +55,7 @@ public class Turtles extends MovingEntity {
     private long localDeltaMs;
     private long startAnimatingMs;
     private long timerMs;
-    private long animatingPeriod = 150;
+    private static final long ANIMATING_PERIOD_MS = 150;
     private int aFrame = 0;
     private int max_aFrame = 2; // Animate only 2 frames
 
@@ -66,11 +66,11 @@ public class Turtles extends MovingEntity {
      * underwaterPeriod
      * 
      * @param pos
-     * @param v
+     * @param velocity
      */
-    public Turtles(Vector2D pos, Vector2D v) {
+    public Turtles(Vector2D pos, Vector2D velocity) {
         super(Main.SPRITE_SHEET + "#turtles");
-        init(pos, v);
+        init(pos, velocity);
     }
 
     /**
@@ -132,7 +132,7 @@ public class Turtles extends MovingEntity {
             return;
 
         if (startAnimatingMs < timerMs) {
-            startAnimatingMs = timerMs + animatingPeriod;
+            startAnimatingMs = timerMs + ANIMATING_PERIOD_MS;
 
             if (isUnderwater)
                 setFrame(getFrame() - 1);

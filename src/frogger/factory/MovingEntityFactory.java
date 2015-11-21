@@ -50,7 +50,7 @@ public class MovingEntityFactory {
     public Vector2D position;
     public Vector2D velocity;
 
-    public Random r;
+    public Random random;
 
     private long updateMs = 0;
     private long copCarDelay = 0;
@@ -66,13 +66,13 @@ public class MovingEntityFactory {
      * Moving Entity factory
      * 
      * @param pos
-     * @param v
+     * @param velocity
      * @param rate
      */
-    public MovingEntityFactory(Vector2D pos, Vector2D v) {
+    public MovingEntityFactory(Vector2D pos, Vector2D velocity) {
         position = pos;
-        velocity = v;
-        r = new Random(System.currentTimeMillis());
+        this.velocity = velocity;
+        random = new Random(System.currentTimeMillis());
 
         creationRate[CAR] = (int) Math.round(((Car.LENGTH) + padding + STEP_SIZE) / Math.abs(velocity.getX()));
         creationRate[TRUCK] = (int) Math.round(((Truck.LENGTH) + padding + STEP_SIZE) / Math.abs(velocity.getX()));
@@ -96,10 +96,10 @@ public class MovingEntityFactory {
 
             rateMs = creationRate[type];
 
-            if (r.nextInt(100) < chance)
+            if (random.nextInt(100) < chance)
                 switch (type) {
                     case CAR:
-                        return new Car(position, velocity, r.nextInt(Car.TYPES));
+                        return new Car(position, velocity, random.nextInt(Car.TYPES));
                     case TRUCK:
                         return new Truck(position, velocity);
                     case SLOG:
@@ -115,8 +115,8 @@ public class MovingEntityFactory {
 
     public MovingEntity buildShortLogWithTurtles(int chance) {
         MovingEntity m = buildBasicObject(SLOG, 80);
-        if (m != null && r.nextInt(100) < chance)
-            return new Turtles(position, velocity, r.nextInt(2));
+        if (m != null && random.nextInt(100) < chance)
+            return new Turtles(position, velocity, random.nextInt(2));
         return m;
     }
 
@@ -127,7 +127,7 @@ public class MovingEntityFactory {
      */
     public MovingEntity buildLongLogWithCrocodile(int chance) {
         MovingEntity m = buildBasicObject(LLOG, 80);
-        if (m != null && r.nextInt(100) < chance)
+        if (m != null && random.nextInt(100) < chance)
             return new Crocodile(position, velocity);
         return m;
     }
@@ -141,7 +141,7 @@ public class MovingEntityFactory {
     public MovingEntity buildVehicle() {
 
         // Build slightly more cars that trucks
-        MovingEntity m = r.nextInt(100) < 80 ? buildBasicObject(CAR, 50) : buildBasicObject(TRUCK, 50);
+        MovingEntity m = random.nextInt(100) < 80 ? buildBasicObject(CAR, 50) : buildBasicObject(TRUCK, 50);
 
         if (m != null) {
 
