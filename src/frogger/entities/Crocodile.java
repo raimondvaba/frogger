@@ -25,8 +25,8 @@
 
 package frogger.entities;
 
-import frogger.CollisionObject;
 import frogger.Main;
+import frogger.collision.CollisionObject;
 import jig.engine.util.Vector2D;
 
 public class Crocodile extends MovingEntity {

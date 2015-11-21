@@ -23,11 +23,13 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package frogger;
+package frogger.audio;
 
 import java.util.List;
 import java.util.Random;
 
+import frogger.Main;
+import frogger.collision.FroggerCollisionDetection;
 import frogger.entities.Frogger;
 
 import java.util.LinkedList;

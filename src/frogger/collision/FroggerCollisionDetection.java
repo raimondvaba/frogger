@@ -23,14 +23,16 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package frogger;
+package frogger.collision;
 
 import java.util.List;
 
+import frogger.Main;
 import frogger.entities.Car;
 import frogger.entities.CopCar;
 import frogger.entities.Crocodile;
 import frogger.entities.Frogger;
+import frogger.entities.Goal;
 import frogger.entities.LongLog;
 import frogger.entities.MovingEntity;
 import frogger.entities.ShortLog;

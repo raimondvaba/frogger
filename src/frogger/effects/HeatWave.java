@@ -23,10 +23,12 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package frogger;
+package frogger.effects;
 
 import java.util.Random;
 
+import frogger.Main;
+import frogger.audio.AudioEfx;
 import frogger.entities.Frogger;
 import frogger.entities.MovingEntity;
 import frogger.entities.Particle;

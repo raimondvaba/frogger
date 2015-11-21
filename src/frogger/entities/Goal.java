@@ -23,9 +23,10 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package frogger;
+package frogger.entities;
 
-import frogger.entities.MovingEntity;
+import frogger.Main;
+import frogger.collision.CollisionObject;
 import jig.engine.util.Vector2D;
 
 public class Goal extends MovingEntity {

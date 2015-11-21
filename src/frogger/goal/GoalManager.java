@@ -23,12 +23,13 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package frogger;
+package frogger.goal;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import frogger.entities.Goal;
 import frogger.entities.MovingEntity;
 import jig.engine.util.Vector2D;
 

@@ -31,8 +31,8 @@ import jig.engine.util.Vector2D;
 import java.util.LinkedList;
 import java.util.List;
 
-import frogger.CollisionObject;
 import frogger.Main;
+import frogger.collision.CollisionObject;
 
 /**
  * Abstract class for moving entities in the game
