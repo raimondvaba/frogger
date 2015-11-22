@@ -50,13 +50,11 @@ public class AudioEfx {
     private static final double LEVEL_COMPLETE_SOUND_DURATION_SEC = 2.0;
     private static final double SOUND_DURATION_SEC = 0.2;
 
-    // These are referenced as to when to play the sound effects
-    FroggerCollisionDetection fc;
+    FroggerCollisionDetection froggerCollisionDetector;
     Frogger frog;
 
     public Random random = new Random(System.currentTimeMillis());
 
-    // Background music
     private AudioStream gameMusic;
 
     private static final String A_FX_PATH = Main.RSC_PATH + "ambient_fx/";
@@ -77,23 +75,14 @@ public class AudioEfx {
 
     public static AudioClip siren = FACTORY.getAudioClip(A_FX_PATH + "siren.ogg");
 
-    // one effect is randomly picked from road_effects or water_effects every
-    // couple of seconds
     private List<AudioClip> roadEffects = new ArrayList<AudioClip>();
     private List<AudioClip> waterEffects = new ArrayList<AudioClip>();
 
     private int effectsDelay = 3000;
     private int deltaT = 0;
 
-    /**
-     * In order to know when to play-back certain effects, we track the state of
-     * collision detector and Frogger
-     * 
-     * @param collisionDetection
-     * @param frogger
-     */
     public AudioEfx(FroggerCollisionDetection collisionDetection, Frogger frogger) {
-        fc = collisionDetection;
+    	froggerCollisionDetector = collisionDetection;
         frog = frogger;
 
         ResourceFactory resourceFactory = FACTORY;
@@ -123,9 +112,9 @@ public class AudioEfx {
 
         if (deltaT > effectsDelay) {
             List<AudioClip> effects = null;
-            if (fc.isOnRoad()) {
+            if (froggerCollisionDetector.isOnRoad()) {
                 effects = roadEffects;
-            } else if (fc.isInRiver()) {
+            } else if (froggerCollisionDetector.isInRiver()) {
                 effects = waterEffects;
             }
             if (effects != null) {
