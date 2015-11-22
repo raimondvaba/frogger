@@ -34,36 +34,28 @@ import frogger.entities.MovingEntity;
 import frogger.entities.Particle;
 import jig.engine.util.Vector2D;
 
-/**
- * Generating the Wind effect in Frogger
- * 
- * @author  vitaliy
- *
- */
 public class WindGust {
 
     private final static int PERIOD_MS = 5000;
     private final static int DURATION_MS = 3000;
+    
+    private int spriteSize = 32;
 
-    private final Random r;
+    private final Random random;
 
     private long timeMs;
     private long durationMs;
 
     private boolean isWindy;
+    
+    private int levelMultiplier = 10;
 
     public WindGust() {
         timeMs = 0;
         isWindy = false;
-        r = new Random(System.currentTimeMillis());
+        random = new Random(System.currentTimeMillis());
     }
 
-    /**
-     * Apply wind force to the Frogger, higher levels have higher wind drag
-     * 
-     * @param   frogger Frogger
-     * @param   level   the current level
-     */
     public void perform(final Frogger frogger, final int level, final long deltaMs) {
         if (!frogger.isAlive) {
             isWindy = false;
@@ -71,23 +63,18 @@ public class WindGust {
         }
 
         if (isWindy && durationMs < DURATION_MS) {
-            double vPos = deltaMs * r.nextDouble() * (0.01 * level);
+            double vPos = deltaMs * random.nextDouble() * (0.01 * level);
             frogger.windReposition(new Vector2D(vPos, 0));
         } else {
             isWindy = false;
         }
     }
 
-    /**
-     * Initiate Wind effect
-     * 
-     * @param   level   current game level
-     */
     public void start(final int level) {
 
         if (!isWindy && timeMs > PERIOD_MS) {
 
-            if (r.nextInt(100) < level * 10) {
+            if (!isSufficientWindInLevel(level)) {
                 durationMs = 1;
                 isWindy = true;
                 AudioEfx.wind.play(0.2);
@@ -98,33 +85,26 @@ public class WindGust {
 
     }
 
-    /**
-     * Wind particle generator
-     * 
-     * @param   level
-     * @return  a wind particle object or null
-     */
     public MovingEntity genParticles(final int level) {
 
-        if (!isWindy)
+        if (!isWindy || isSufficientWindInLevel(level))
             return null;
 
-        // Lower game level has less wind strength and should be less visible
-        if (r.nextInt(100) > level * 10)
-            return null;
-
-        int yPos = r.nextInt(13 * 32) + 32; // visible area in y-axis of the
-                                            // game
-        Vector2D pos = new Vector2D(0, yPos); // start behind left side
-
-        // Build somewhat random velocity vector for each wind particle, looks
-        // cool
-        Vector2D v = new Vector2D(0.2 + r.nextDouble(), (r.nextDouble() - 0.5) * 0.1);
-        return new Particle(Main.SPRITE_SHEET + "#white_dot", pos, v);
+        int randomYWindPosition = random.nextInt(Main.WORLD_WIDTH) + spriteSize;
+        
+        Vector2D windParticlePosition = new Vector2D(0, randomYWindPosition);
+        Vector2D windVelocity = new Vector2D(0.2 + random.nextDouble(), (random.nextDouble() - 0.5) * 0.1);
+        
+        return new Particle(Main.SPRITE_SHEET + "#white_dot", windParticlePosition, windVelocity);
     }
 
     public void update(final long deltaMs) {
         timeMs += deltaMs;
         durationMs += deltaMs;
+    }
+    
+    private boolean isSufficientWindInLevel(final int level){
+        if (random.nextInt(100) > level * levelMultiplier)return true;
+        else return false;
     }
 }
