@@ -57,18 +57,10 @@ public class MovingEntityFactory {
 
     private long rateMs = 1000;
 
-    private int padding = 64; // distance between 2 objects in a traffic/river
-                              // line
+    private int padding = 64; 
 
     private int[] creationRate = new int[4];
 
-    /**
-     * Moving Entity factory
-     * 
-     * @param pos
-     * @param velocity
-     * @param rate
-     */
     public MovingEntityFactory(Vector2D pos, Vector2D velocity) {
         position = pos;
         this.velocity = velocity;
@@ -80,16 +72,6 @@ public class MovingEntityFactory {
         creationRate[LLOG] = (int) Math.round(((LongLog.LENGTH) + padding - STEP_SIZE) / Math.abs(velocity.getX()));
     }
 
-    /**
-     * Building basic moving object {car, truck, short log, long log}
-     * 
-     * @param type
-     *            - {CAR, TRUCK, SLOG, LLOG}
-     * @param chance
-     *            - of production (n out of 100)
-     * @return MovingEntity on chance of success, otherwise return null chance
-     *         gives some holes in the production pattern, looks better.
-     */
     public MovingEntity buildBasicObject(int type, int chance) {
         if (updateMs > rateMs) {
             updateMs = 0;
@@ -120,11 +102,6 @@ public class MovingEntityFactory {
         return m;
     }
 
-    /**
-     * Long Tree Logs with a some chance of Crocodile!
-     * 
-     * @return
-     */
     public MovingEntity buildLongLogWithCrocodile(int chance) {
         MovingEntity m = buildBasicObject(LLOG, 80);
         if (m != null && random.nextInt(100) < chance)
@@ -132,23 +109,12 @@ public class MovingEntityFactory {
         return m;
     }
 
-    /**
-     * Cars appear more often than trucks If traffic line is clear, send a
-     * faaast CopCar!
-     * 
-     * @return
-     */
     public MovingEntity buildVehicle() {
 
-        // Build slightly more cars that trucks
         MovingEntity m = random.nextInt(100) < 80 ? buildBasicObject(CAR, 50) : buildBasicObject(TRUCK, 50);
 
         if (m != null) {
 
-            /*
-             * If the road line is clear, that is there are no cars or truck on
-             * it then send in a high speed cop car
-             */
             if (Math.abs(velocity.getX() * copCarDelay) > Main.WORLD_WIDTH) {
                 copCarDelay = 0;
                 return new CopCar(position, velocity.scale(5));

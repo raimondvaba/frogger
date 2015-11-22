@@ -53,17 +53,10 @@ public class GoalManager {
         init(1);
     }
 
-    /**
-     * First level only has 2 goals Second - 4 goals All others have standard 6
-     * goals
-     * 
-     * @param level
-     */
     public void init(final int level) {
 
         goals.clear();
 
-        // if (level < 3) {
         switch (level) {
             case 1:
                 for (int i = 5; i < 9; i += 2) {
@@ -78,26 +71,12 @@ public class GoalManager {
                 break;
         }
         return;
-        // }
-
-        // for (int i=0; i<MAX_NUM_OF_GOALS; i++)
-        // goals.add(new Goal(i));
     }
 
-    /**
-     * 'goals' is a protected
-     * 
-     * @return
-     */
     public List<Goal> get() {
         return goals;
     }
 
-    /**
-     * getUnreached
-     * 
-     * @return - list of goals currently haven't been reached
-     */
     public List<Goal> getUnreached() {
         List<Goal> l = new LinkedList<Goal>();
         for (Goal g : goals)
@@ -107,10 +86,6 @@ public class GoalManager {
         return l;
     }
 
-    /**
-     * Based on internal timer, display bonus at a goal that hasn't been reached
-     * for a duration specified by bonusShowMs
-     */
     public void doBonusCheck() {
         if (!showingBonus && dRMs > bonusRateMs) {
             dSMs = 0;

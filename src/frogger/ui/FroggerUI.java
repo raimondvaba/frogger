@@ -66,7 +66,6 @@ public class FroggerUI implements ViewableLayer {
         if (game.GameLives > 0) {
             int dx = 0;
 
-            // if player has more than 10 lives, draw only 10 hearts
             int maxHearts = game.GameLives;
             if (maxHearts > 10)
                 maxHearts = 10;
@@ -113,7 +112,7 @@ public class FroggerUI implements ViewableLayer {
     }
 
     public void setActivation(boolean a) {
-        // can't turn this layer off!
+     
     }
 
 }
