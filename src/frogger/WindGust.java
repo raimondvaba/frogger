@@ -45,8 +45,6 @@ public class WindGust {
 
     private boolean isWindy;
     
-    private int visibleYAxis = 416;
-    private int yBuffer = 32;
     private int levelMultiplier = 10;
 
     public WindGust() {
@@ -89,7 +87,7 @@ public class WindGust {
         if (!isWindy || isSufficientWindInLevel(level))
             return null;
 
-        int randomYWindPosition = random.nextInt(visibleYAxis) + yBuffer;
+        int randomYWindPosition = random.nextInt(Main.WORLD_WIDTH) + Main.SPRITE_SIZE;
         
         Vector2D windParticlePosition = new Vector2D(0, randomYWindPosition);
         Vector2D windVelocity = new Vector2D(0.2 + random.nextDouble(), (random.nextDouble() - 0.5) * 0.1);
