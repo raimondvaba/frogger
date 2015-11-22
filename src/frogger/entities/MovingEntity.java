@@ -31,8 +31,8 @@ import jig.engine.util.Vector2D;
 import java.util.LinkedList;
 import java.util.List;
 
-import frogger.CollisionObject;
 import frogger.Main;
+import frogger.collision.CollisionObject;
 
 /**
  * Abstract class for moving entities in the game
@@ -54,10 +54,10 @@ public abstract class MovingEntity extends Body {
         collisionObjects = new LinkedList<CollisionObject>();
     }
 
-    public MovingEntity(String name, Vector2D pos, Vector2D v) {
+    public MovingEntity(String name, Vector2D pos, Vector2D velocity) {
         super(name);
         position = pos;
-        velocity = v;
+        this.velocity = velocity;
         collisionObjects = new LinkedList<CollisionObject>();
     }
 

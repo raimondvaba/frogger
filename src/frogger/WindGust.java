@@ -27,6 +27,7 @@ package frogger;
 
 import java.util.Random;
 
+import frogger.audio.AudioEfx;
 import frogger.entities.Frogger;
 import frogger.entities.MovingEntity;
 import frogger.entities.Particle;

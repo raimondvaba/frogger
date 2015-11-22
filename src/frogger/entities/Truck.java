@@ -33,9 +33,9 @@ public class Truck extends MovingEntity {
     private final static int SIZE = 2;
     public final static int LENGTH = SPRITE_SIZE * SIZE;
 
-    public Truck(Vector2D pos, Vector2D v) {
-        super(Main.SPRITE_SHEET + "#truck", pos, v);
+    public Truck(Vector2D pos, Vector2D velocity) {
+        super(Main.SPRITE_SHEET + "#truck", pos, velocity);
         addEntityCollisionObjects(SIZE);
-        setVisibleFrame(v, 1, 0);
+        setVisibleFrame(velocity, 1, 0);
     }
 }

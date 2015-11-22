@@ -27,9 +27,16 @@ package frogger;
 
 import java.awt.event.KeyEvent;
 
+import frogger.audio.AudioEfx;
+import frogger.collision.FroggerCollisionDetection;
+import frogger.effects.HeatWave;
+import frogger.effects.WindGust;
 import frogger.entities.Frogger;
+import frogger.entities.Goal;
 import frogger.entities.MovingEntity;
 import frogger.factory.MovingEntityFactory;
+import frogger.goal.GoalManager;
+import frogger.ui.FroggerUI;
 import jig.engine.ImageResource;
 import jig.engine.PaintableCanvas;
 import jig.engine.RenderingContext;
@@ -48,7 +55,7 @@ public class Main extends StaticScreenGame {
     public static final int WORLD_HEIGHT = HEIGHT * SPRITE_SIZE;
     public static final Vector2D FROGGER_START = new Vector2D(6 * SPRITE_SIZE, WORLD_HEIGHT - SPRITE_SIZE);
 
-    static final String RSC_PATH = "resources/";
+    public static final String RSC_PATH = "resources/";
     public static final String SPRITE_SHEET = RSC_PATH + "frogger_sprites.png";
 
     static final int FROGGER_LIVES = 5;
@@ -80,14 +87,31 @@ public class Main extends StaticScreenGame {
 
     private ImageBackgroundLayer backgroundLayer;
 
-    static final int GAME_INTRO = 0;
-    static final int GAME_PLAY = 1;
-    static final int GAME_FINISH_LEVEL = 2;
-    static final int GAME_INSTRUCTIONS = 3;
-    static final int GAME_OVER = 4;
+    public static final int GAME_INTRO = 0;
+    public static final int GAME_PLAY = 1;
+    public static final int GAME_FINISH_LEVEL = 2;
+    public static final int GAME_INSTRUCTIONS = 3;
+    public static final int GAME_OVER = 4;
 
-    protected int GameState = GAME_INTRO;
-    protected int GameLevel = STARTING_LEVEL;
+    private int GameState = GAME_INTRO;
+
+    public int getGameState() {
+        return GameState;
+    }
+
+    public void setGameState(int gameState) {
+        GameState = gameState;
+    }
+
+    private int GameLevel = STARTING_LEVEL;
+
+    public int getGameLevel() {
+        return GameLevel;
+    }
+
+    public void setGameLevel(int gameLevel) {
+        GameLevel = gameLevel;
+    }
 
     public int GameLives = FROGGER_LIVES;
     public int GameScore = 0;

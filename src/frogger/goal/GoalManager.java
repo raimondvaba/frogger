@@ -23,12 +23,13 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package frogger;
+package frogger.goal;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import frogger.entities.Goal;
 import frogger.entities.MovingEntity;
 import jig.engine.util.Vector2D;
 
@@ -37,7 +38,7 @@ public class GoalManager {
     final static int MAX_NUM_OF_GOALS = 6;
 
     private List<Goal> goals;
-    private Random r;
+    private Random random;
 
     protected boolean showingBonus = false;
 
@@ -48,7 +49,7 @@ public class GoalManager {
 
     public GoalManager() {
         goals = new LinkedList<Goal>();
-        r = new Random(System.currentTimeMillis());
+        random = new Random(System.currentTimeMillis());
         init(1);
     }
 
@@ -115,7 +116,7 @@ public class GoalManager {
             dSMs = 0;
             showingBonus = true;
             List<Goal> l = getUnreached();
-            l.get(r.nextInt(l.size())).setBonus(true);
+            l.get(random.nextInt(l.size())).setBonus(true);
         }
 
         if (showingBonus && dSMs > bonusShowMs) {

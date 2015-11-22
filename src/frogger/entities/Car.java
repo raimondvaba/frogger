@@ -34,10 +34,10 @@ public class Car extends MovingEntity {
     private final static int SIZE = 1;
     public final static int LENGTH = SPRITE_SIZE * SIZE;
 
-    public Car(Vector2D pos, Vector2D v, int randId) {
-        super(Main.SPRITE_SHEET + "#car" + randId, pos, v);
+    public Car(Vector2D pos, Vector2D velocity, int randId) {
+        super(Main.SPRITE_SHEET + "#car" + randId, pos, velocity);
         addEntityCollisionObjects(SIZE);
-        setVisibleFrame(v, 1, 0);
+        setVisibleFrame(velocity, 1, 0);
     }
 
 }

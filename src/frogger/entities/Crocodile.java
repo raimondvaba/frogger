@@ -25,8 +25,8 @@
 
 package frogger.entities;
 
-import frogger.CollisionObject;
 import frogger.Main;
+import frogger.collision.CollisionObject;
 import jig.engine.util.Vector2D;
 
 public class Crocodile extends MovingEntity {
@@ -45,12 +45,12 @@ public class Crocodile extends MovingEntity {
         return head;
     }
 
-    public Crocodile(Vector2D pos, Vector2D v) {
-        super(Main.SPRITE_SHEET + "#crocodile", pos, v);
+    public Crocodile(Vector2D pos, Vector2D velocity) {
+        super(Main.SPRITE_SHEET + "#crocodile", pos, velocity);
 
         addEntityCollisionObjects(SIZE);
 
-        if (v.getX() < 0) {
+        if (velocity.getX() < 0) {
             startFrame = 2;
             head = collisionObjects.get(0);
         } else {

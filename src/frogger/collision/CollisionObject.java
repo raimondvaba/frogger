@@ -23,7 +23,7 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package frogger;
+package frogger.collision;
 
 import jig.engine.physics.vpe.VanillaSphere;
 import jig.engine.util.Vector2D;
