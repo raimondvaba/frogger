@@ -47,7 +47,6 @@ public class FroggerCollisionDetection {
     public Frogger frog;
     public CollisionObject frogSphere;
 
-    // River and Road bounds, all we care about is Y axis in this game
     public int riverVerticalStart = 1 * STEP_SIZE;
     public int riverVerticalEnd = riverVerticalStart + 6 * STEP_SIZE;
     public int roadVerticalStart = 8 * STEP_SIZE;
@@ -93,14 +92,8 @@ public class FroggerCollisionDetection {
             return;
         }
 
-        // frog.allignXPositionToGrid();
     }
 
-    /**
-     * Check game area bounds
-     * 
-     * @return
-     */
     public boolean isOutOfBounds() {
         Vector2D frogPos = frogSphere.getCenterPosition();
         if (frogPos.getY() < STEP_SIZE || frogPos.getY() > Main.WORLD_HEIGHT)
@@ -110,11 +103,6 @@ public class FroggerCollisionDetection {
         return false;
     }
 
-    /**
-     * Bound check if the frog is in river
-     * 
-     * @return
-     */
     public boolean isInRiver() {
         Vector2D frogPos = frogSphere.getCenterPosition();
 
@@ -124,11 +112,6 @@ public class FroggerCollisionDetection {
         return false;
     }
 
-    /**
-     * Bound check if the frog is on the road
-     * 
-     * @return
-     */
     public boolean isOnRoad() {
         Vector2D frogPos = frogSphere.getCenterPosition();
 
@@ -151,7 +134,6 @@ public class FroggerCollisionDetection {
                 frog.follow(m);
         }
 
-        /* Follow the log */
         if (m instanceof LongLog || m instanceof ShortLog) {
             frog.follow(m);
         }
@@ -162,7 +144,6 @@ public class FroggerCollisionDetection {
             frog.follow(m);
         }
 
-        /* Reach a goal */
         if (m instanceof Goal) {
             frog.reach((Goal) (m));
         }
