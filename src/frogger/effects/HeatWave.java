@@ -43,6 +43,8 @@ public class HeatWave {
 
     private long timeMs;
     private long durationMs;
+    
+    private int levelMultiplier = 10;
 
     public boolean isHot;
 
@@ -52,20 +54,14 @@ public class HeatWave {
         random = new Random(System.currentTimeMillis());
     }
 
-    /**
-     * This is checked with every game update
-     * 
-     * @param frogger
-     *            - reference Frogger's hw_hasMoved
-     * @param deltaMs
-     */
+
     public void perform(Frogger frogger, final long deltaMs, final int level) {
         if (!frogger.isAlive) {
             isHot = false;
             return;
         }
 
-        if (isHot && durationMs > (DURATION_MS - (level * 10)) && !frogger.hw_hasMoved) {
+        if (isHot && durationMs > (DURATION_MS - (level * levelMultiplier)) && !frogger.hw_hasMoved) {
             frogger.randomJump(random.nextInt(4));
             isHot = false;
         }
@@ -74,17 +70,10 @@ public class HeatWave {
             isHot = false;
     }
 
-    /**
-     * Initiate the Heat Wave effect
-     * 
-     * @param f
-     * @param temp
-     *            - based on the GameTemp, this effects occurs more often
-     */
     public void start(Frogger f, final int gameLevel) {
 
         if (!isHot && timeMs > PERIOD_MS) {
-            if (random.nextInt(100) < gameLevel * 10) {
+            if (random.nextInt(100) < gameLevel * levelMultiplier) {
                 durationMs = 1;
                 isHot = true;
                 f.hw_hasMoved = false;
@@ -94,18 +83,10 @@ public class HeatWave {
         }
     }
 
-    /**
-     * Generating particles
-     * 
-     * @param f
-     * @return
-     */
     public MovingEntity genParticles(Vector2D pos) {
         if (!isHot || random.nextInt(100) > 10)
             return null;
 
-        // Generate particles from center of the Frogger to all directions
-        // around
         Vector2D velocity = new Vector2D((random.nextDouble() - 0.5) * 0.1, (random.nextDouble() - 0.5) * 0.1);
 
         return new Particle(Main.SPRITE_SHEET + "#smoke_cloud", pos, velocity, DURATION_MS);
