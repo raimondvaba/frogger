@@ -25,7 +25,7 @@
 
 package frogger.entities;
 
-import frogger.Main;
+import frogger.graphics.Graphics;
 import jig.engine.util.Vector2D;
 
 public class Car extends MovingEntity {
@@ -35,7 +35,7 @@ public class Car extends MovingEntity {
     public final static int LENGTH = SPRITE_SIZE * SIZE;
 
     public Car(Vector2D pos, Vector2D velocity, int randId) {
-        super(Main.SPRITE_SHEET + "#car" + randId, pos, velocity);
+        super(Graphics.SPRITE_SHEET + "#car" + randId, pos, velocity);
         addEntityCollisionObjects(SIZE);
         setVisibleFrame(velocity, 1, 0);
     }

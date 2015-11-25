@@ -30,9 +30,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import frogger.Main;
 import frogger.collision.FroggerCollisionDetection;
 import frogger.entities.Frogger;
+import frogger.graphics.Graphics;
 import jig.engine.ResourceFactory;
 import jig.engine.audio.AudioState;
 import jig.engine.audio.jsound.AudioClip;
@@ -57,21 +57,21 @@ public class AudioEfx {
 
     private AudioStream gameMusic;
 
-    private static final String A_FX_PATH = Main.RSC_PATH + "ambient_fx/";
+    private static final String A_FX_PATH = Graphics.RSC_PATH + "ambient_fx/";
 
-    public static AudioClip frogJump = FACTORY.getAudioClip(Main.RSC_PATH + "jump.wav");
+    public static AudioClip frogJump = FACTORY.getAudioClip(Graphics.RSC_PATH + "jump.wav");
 
-    public static AudioClip frogDie = FACTORY.getAudioClip(Main.RSC_PATH + "frog_die.ogg");
+    public static AudioClip frogDie = FACTORY.getAudioClip(Graphics.RSC_PATH + "frog_die.ogg");
 
-    public static AudioClip frogGoal = FACTORY.getAudioClip(Main.RSC_PATH + "goal.ogg");
+    public static AudioClip frogGoal = FACTORY.getAudioClip(Graphics.RSC_PATH + "goal.ogg");
 
-    public static AudioClip levelGoal = FACTORY.getAudioClip(Main.RSC_PATH + "level_goal.ogg");
+    public static AudioClip levelGoal = FACTORY.getAudioClip(Graphics.RSC_PATH + "level_goal.ogg");
 
-    public static AudioClip wind = FACTORY.getAudioClip(Main.RSC_PATH + "wind.ogg");
+    public static AudioClip wind = FACTORY.getAudioClip(Graphics.RSC_PATH + "wind.ogg");
 
-    public static AudioClip heat = FACTORY.getAudioClip(Main.RSC_PATH + "match.ogg");
+    public static AudioClip heat = FACTORY.getAudioClip(Graphics.RSC_PATH + "match.ogg");
 
-    public static AudioClip bonus = FACTORY.getAudioClip(Main.RSC_PATH + "bonus.ogg");
+    public static AudioClip bonus = FACTORY.getAudioClip(Graphics.RSC_PATH + "bonus.ogg");
 
     public static AudioClip siren = FACTORY.getAudioClip(A_FX_PATH + "siren.ogg");
 
@@ -95,7 +95,7 @@ public class AudioEfx {
                 resourceFactory.getAudioClip(A_FX_PATH + "splash.ogg"),
                 resourceFactory.getAudioClip(A_FX_PATH + "frog.ogg")));
 
-        gameMusic = new AudioStream(Main.RSC_PATH + "bg_music.ogg");
+        gameMusic = new AudioStream(Graphics.RSC_PATH + "bg_music.ogg");
     }
 
     public void playGameMusic() {

@@ -25,7 +25,7 @@
 
 package frogger.entities;
 
-import frogger.Main;
+import frogger.graphics.Graphics;
 import jig.engine.util.Vector2D;
 
 /**
@@ -69,7 +69,7 @@ public class Turtles extends MovingEntity {
      * @param velocity
      */
     public Turtles(Vector2D pos, Vector2D velocity) {
-        super(Main.SPRITE_SHEET + "#turtles");
+        super(Graphics.SPRITE_SHEET + "#turtles");
         init(pos, velocity);
     }
 
@@ -82,7 +82,7 @@ public class Turtles extends MovingEntity {
      *            - 0 submerged; 1 - floating
      */
     public Turtles(Vector2D pos, Vector2D v, int water) {
-        super(Main.SPRITE_SHEET + "#turtles");
+        super(Graphics.SPRITE_SHEET + "#turtles");
         init(pos, v);
 
         // set submerged/floating state based on water variable

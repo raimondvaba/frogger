@@ -27,11 +27,12 @@ package frogger.effects;
 
 import java.util.Random;
 
-import frogger.Main;
+import frogger.World;
 import frogger.audio.AudioEfx;
 import frogger.entities.Frogger;
 import frogger.entities.MovingEntity;
 import frogger.entities.Particle;
+import frogger.graphics.Graphics;
 import jig.engine.util.Vector2D;
 
 public class WindGust {
@@ -90,12 +91,12 @@ public class WindGust {
         if (!isWindy || isSufficientWindInLevel(level))
             return null;
 
-        int randomYWindPosition = random.nextInt(Main.WORLD_WIDTH) + spriteSize;
+        int randomYWindPosition = random.nextInt(World.WORLD_WIDTH) + spriteSize;
         
         Vector2D windParticlePosition = new Vector2D(0, randomYWindPosition);
         Vector2D windVelocity = new Vector2D(0.2 + random.nextDouble(), (random.nextDouble() - 0.5) * 0.1);
         
-        return new Particle(Main.SPRITE_SHEET + "#white_dot", windParticlePosition, windVelocity);
+        return new Particle(Graphics.SPRITE_SHEET + "#white_dot", windParticlePosition, windVelocity);
     }
 
     public void update(final long deltaMs) {
@@ -104,7 +105,9 @@ public class WindGust {
     }
     
     private boolean isSufficientWindInLevel(final int level){
-        if (random.nextInt(100) > level * levelMultiplier)return true;
-        else return false;
+        if (random.nextInt(100) > level * levelMultiplier)
+        	return true;
+        else 
+        	return false;
     }
 }

@@ -27,11 +27,11 @@ package frogger.effects;
 
 import java.util.Random;
 
-import frogger.Main;
 import frogger.audio.AudioEfx;
 import frogger.entities.Frogger;
 import frogger.entities.MovingEntity;
 import frogger.entities.Particle;
+import frogger.graphics.Graphics;
 import jig.engine.util.Vector2D;
 
 public class HeatWave {
@@ -89,7 +89,7 @@ public class HeatWave {
 
         Vector2D velocity = new Vector2D((random.nextDouble() - 0.5) * 0.1, (random.nextDouble() - 0.5) * 0.1);
 
-        return new Particle(Main.SPRITE_SHEET + "#smoke_cloud", pos, velocity, DURATION_MS);
+        return new Particle(Graphics.SPRITE_SHEET + "#smoke_cloud", pos, velocity, DURATION_MS);
     }
 
     public void update(final long deltaMs) {

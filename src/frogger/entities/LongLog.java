@@ -25,7 +25,7 @@
 
 package frogger.entities;
 
-import frogger.Main;
+import frogger.graphics.Graphics;
 import jig.engine.util.Vector2D;
 
 public class LongLog extends MovingEntity {
@@ -34,7 +34,7 @@ public class LongLog extends MovingEntity {
     public final static int LENGTH = SPRITE_SIZE * SIZE;
 
     public LongLog(Vector2D pos, Vector2D velocity) {
-        super(Main.SPRITE_SHEET + "#longlog", pos, velocity);
+        super(Graphics.SPRITE_SHEET + "#longlog", pos, velocity);
         addEntityCollisionObjects(SIZE);
         setVisibleFrame(velocity, 1, 0);
     }

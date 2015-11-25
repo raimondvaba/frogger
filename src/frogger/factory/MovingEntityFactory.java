@@ -25,11 +25,9 @@
 
 package frogger.factory;
 
-import jig.engine.util.Vector2D;
-
 import java.util.Random;
 
-import frogger.Main;
+import frogger.World;
 import frogger.entities.Car;
 import frogger.entities.CopCar;
 import frogger.entities.Crocodile;
@@ -38,6 +36,7 @@ import frogger.entities.MovingEntity;
 import frogger.entities.ShortLog;
 import frogger.entities.Truck;
 import frogger.entities.Turtles;
+import jig.engine.util.Vector2D;
 
 public class MovingEntityFactory {
 
@@ -57,7 +56,8 @@ public class MovingEntityFactory {
 
     private long rateMs = 1000;
 
-    private int padding = 64; 
+    private int padding = STEP_SIZE * 2; // distance between 2 objects in a
+                                         // traffic/river line
 
     private int[] creationRate = new int[4];
 
@@ -115,7 +115,7 @@ public class MovingEntityFactory {
 
         if (m != null) {
 
-            if (Math.abs(velocity.getX() * copCarDelay) > Main.WORLD_WIDTH) {
+            if (Math.abs(velocity.getX() * copCarDelay) > World.WORLD_WIDTH) {
                 copCarDelay = 0;
                 return new CopCar(position, velocity.scale(5));
             }

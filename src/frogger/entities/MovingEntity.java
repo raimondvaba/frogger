@@ -25,14 +25,13 @@
 
 package frogger.entities;
 
-import jig.engine.physics.Body;
-import jig.engine.util.Vector2D;
-
 import java.util.LinkedList;
 import java.util.List;
 
-import frogger.Main;
+import frogger.World;
 import frogger.collision.CollisionObject;
+import jig.engine.physics.Body;
+import jig.engine.util.Vector2D;
 
 /**
  * Abstract class for moving entities in the game
@@ -104,7 +103,7 @@ public abstract class MovingEntity extends Body {
      * detection) travel in y-axis
      */
     public void update(final long deltaMs) {
-        if (position.getX() > Main.WORLD_WIDTH + width || position.getX() < -(SPRITE_SIZE * 4))
+        if (position.getX() > World.WORLD_WIDTH + width || position.getX() < -(SPRITE_SIZE * 4))
             setActivation(false);
 
         position = new Vector2D(position.getX() + velocity.getX() * deltaMs,

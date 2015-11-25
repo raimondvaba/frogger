@@ -25,8 +25,8 @@
 
 package frogger.entities;
 
-import frogger.Main;
 import frogger.collision.CollisionObject;
+import frogger.graphics.Graphics;
 import jig.engine.util.Vector2D;
 
 public class Goal extends MovingEntity {
@@ -35,7 +35,7 @@ public class Goal extends MovingEntity {
     public boolean isBonus = false;
 
     public Goal(int loc) {
-        super(Main.SPRITE_SHEET + "#goal");
+        super(Graphics.SPRITE_SHEET + "#goal");
         position = new Vector2D(SPRITE_SIZE * (1 + 2 * loc), SPRITE_SIZE);
         collisionObjects.add(new CollisionObject("colSmall", position));
         sync(position);
@@ -43,7 +43,7 @@ public class Goal extends MovingEntity {
     }
 
     public Goal(Vector2D pos) {
-        super(Main.SPRITE_SHEET + "#goal");
+        super(Graphics.SPRITE_SHEET + "#goal");
         position = pos;
         collisionObjects.add(new CollisionObject("colSmall", position));
         sync(position);

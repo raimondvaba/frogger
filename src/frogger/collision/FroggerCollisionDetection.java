@@ -27,7 +27,7 @@ package frogger.collision;
 
 import java.util.List;
 
-import frogger.Main;
+import frogger.World;
 import frogger.entities.Car;
 import frogger.entities.CopCar;
 import frogger.entities.Crocodile;
@@ -52,8 +52,8 @@ public class FroggerCollisionDetection {
     public int roadVerticalStart = 8 * STEP_SIZE;
     public int roadVerticalEnd = roadVerticalStart + 5 * STEP_SIZE;
 
-    public FroggerCollisionDetection(Frogger f) {
-        frog = f;
+    public FroggerCollisionDetection(Frogger frog) {
+        this.frog = frog;
         frogSphere = frog.getCollisionObjects().get(0);
     }
 
@@ -96,9 +96,9 @@ public class FroggerCollisionDetection {
 
     public boolean isOutOfBounds() {
         Vector2D frogPos = frogSphere.getCenterPosition();
-        if (frogPos.getY() < STEP_SIZE || frogPos.getY() > Main.WORLD_HEIGHT)
+        if (frogPos.getY() < STEP_SIZE || frogPos.getY() > World.WORLD_HEIGHT)
             return true;
-        if (frogPos.getX() < 0 || frogPos.getX() > Main.WORLD_WIDTH)
+        if (frogPos.getX() < 0 || frogPos.getX() > World.WORLD_WIDTH)
             return true;
         return false;
     }
