@@ -34,6 +34,7 @@ import frogger.entities.Particle;
 import frogger.graphics.Graphics;
 import jig.engine.util.Vector2D;
 
+
 public class HeatWave {
 
     final static int PERIOD_MS = 2000;
