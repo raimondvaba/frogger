@@ -24,10 +24,6 @@ public class Graphics {
         ImageResource bkg = ResourceFactory.getFactory().getFrames(SPRITE_SHEET + "#background").get(0);
         setBackgroundLayer(new ImageBackgroundLayer(bkg, World.WORLD_WIDTH, World.WORLD_HEIGHT, ImageBackgroundLayer.TILE_IMAGE));
 
-        // Used in CollisionObject, basically 2 different collision spheres
-        // 30x30 is a large sphere (sphere that fits inside a 30x30 pixel
-        // rectangle)
-        // 4x4 is a tiny sphere
         PaintableCanvas.loadDefaultFrames("col", 30, 30, 2, JIGSHAPE.RECTANGLE, null);
         PaintableCanvas.loadDefaultFrames("colSmall", 4, 4, 2, JIGSHAPE.RECTANGLE, null);
     }
