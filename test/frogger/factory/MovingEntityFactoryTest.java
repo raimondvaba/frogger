@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import frogger.Game;
 import jig.engine.util.Vector2D;
 
 public class MovingEntityFactoryTest {
