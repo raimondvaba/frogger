@@ -1,28 +1,3 @@
-/**
- * Copyright (c) 2009 Vitaliy Pavlenko
- *
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
- * 
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
- */
-
 package frogger.goal;
 
 import java.util.LinkedList;
@@ -50,10 +25,10 @@ public class GoalManager {
     public GoalManager() {
         goals = new LinkedList<Goal>();
         random = new Random(System.currentTimeMillis());
-        init(1);
+        initializeGoalsPerLevel(1);
     }
 
-    public void init(final int level) {
+    public int initializeGoalsPerLevel(final int level) {
 
         goals.clear();
 
@@ -63,14 +38,14 @@ public class GoalManager {
                     goals.add(new Goal(new Vector2D(i * MovingEntity.SPRITE_SIZE, MovingEntity.SPRITE_SIZE)));
                 }
                 break;
-            //case 2:
             default:
                 for (int i = 3; i < 11; i += 2) {
                     goals.add(new Goal(new Vector2D(i * MovingEntity.SPRITE_SIZE, MovingEntity.SPRITE_SIZE)));
                 }
                 break;
         }
-        return;
+        
+        return goals.size();
     }
 
     public List<Goal> get() {
@@ -78,20 +53,20 @@ public class GoalManager {
     }
 
     public List<Goal> getUnreached() {
-        List<Goal> l = new LinkedList<Goal>();
+        List<Goal> unreachedGoals = new LinkedList<Goal>();
         for (Goal g : goals)
             if (!g.isReached)
-                l.add(g);
+            	unreachedGoals.add(g);
 
-        return l;
+        return unreachedGoals;
     }
 
     public void doBonusCheck() {
         if (!showingBonus && dRMs > bonusRateMs) {
             dSMs = 0;
             showingBonus = true;
-            List<Goal> l = getUnreached();
-            l.get(random.nextInt(l.size())).setBonus(true);
+            List<Goal> unreachedGoals = getUnreached();
+            unreachedGoals.get(random.nextInt(unreachedGoals.size())).setBonus(true);
         }
 
         if (showingBonus && dSMs > bonusShowMs) {
