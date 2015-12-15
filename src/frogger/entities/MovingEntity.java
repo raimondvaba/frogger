@@ -60,8 +60,8 @@ public abstract class MovingEntity extends Body {
         collisionObjects = new LinkedList<CollisionObject>();
     }
 
-    protected void setVisibleFrame(Vector2D v, int a, int b) {
-        int index = v.getX() < 0 ? a : b;
+    protected void setVisibleFrame(Vector2D v, int frameOneIndex, int frameTwoIndex) {
+        int index = v.getX() < 0 ? frameOneIndex : frameTwoIndex;
         setFrame(index);
     }
 
