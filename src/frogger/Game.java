@@ -138,6 +138,7 @@ public class Game extends StaticScreenGame {
                 graphics.getBackgroundLayer().render(rc);
 
                 if (frogger.isAlive) {
+                	
                     movingObjectsLayer.render(rc);
                     // frog.collisionObjects.get(0).render(rc);
                     frogger.render(rc);

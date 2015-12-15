@@ -63,7 +63,7 @@ public class GoalManager {
                     goals.add(new Goal(new Vector2D(i * MovingEntity.SPRITE_SIZE, MovingEntity.SPRITE_SIZE)));
                 }
                 break;
-            case 2:
+            //case 2:
             default:
                 for (int i = 3; i < 11; i += 2) {
                     goals.add(new Goal(new Vector2D(i * MovingEntity.SPRITE_SIZE, MovingEntity.SPRITE_SIZE)));
