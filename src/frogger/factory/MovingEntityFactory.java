@@ -1,27 +1,3 @@
-/**
- * Copyright (c) 2009 Vitaliy Pavlenko
- *
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
- * 
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
- */
 
 package frogger.factory;
 
@@ -40,24 +16,23 @@ import jig.engine.util.Vector2D;
 
 public class MovingEntityFactory {
 
-    public static final int CAR = 0;
-    public static final int TRUCK = 1;
-    public static final int SLOG = 2;
-    public static final int LLOG = 3;
-    public static final int STEP_SIZE = 32;
+    private int CAR = 0;
+    private int TRUCK = 1;
+    private int SLOG = 2;
+    private int LLOG = 3;
+    private int STEP_SIZE = 32;
 
-    public Vector2D position;
-    public Vector2D velocity;
+    private Vector2D position;
+    private Vector2D velocity;
 
-    public Random random;
+    private Random random;
 
     private long updateMs = 0;
     private long copCarDelay = 0;
 
     private long rateMs = 1000;
 
-    private int padding = STEP_SIZE * 2; // distance between 2 objects in a
-                                         // traffic/river line
+    private int padding = STEP_SIZE * 2; 
 
     private int[] creationRate = new int[4];
 
@@ -65,7 +40,6 @@ public class MovingEntityFactory {
         position = pos;
         this.velocity = velocity;
         random = new Random(System.currentTimeMillis());
-
         creationRate[CAR] = (int) Math.round(((Car.LENGTH) + padding + STEP_SIZE) / Math.abs(velocity.getX()));
         creationRate[TRUCK] = (int) Math.round(((Truck.LENGTH) + padding + STEP_SIZE) / Math.abs(velocity.getX()));
         creationRate[SLOG] = (int) Math.round(((ShortLog.LENGTH) + padding - STEP_SIZE) / Math.abs(velocity.getX()));
@@ -80,13 +54,13 @@ public class MovingEntityFactory {
 
             if (random.nextInt(100) < chance)
                 switch (type) {
-                    case CAR:
-                        return new Car(position, velocity, random.nextInt(Car.TYPES));
-                    case TRUCK:
+                    case 0:
+                        return new Car(position, velocity);
+                    case 1:
                         return new Truck(position, velocity);
-                    case SLOG:
+                    case 2:
                         return new ShortLog(position, velocity);
-                    case LLOG:
+                    case 3:
                         return new LongLog(position, velocity);
                     default:
                         return null;
@@ -96,24 +70,23 @@ public class MovingEntityFactory {
     }
 
     public MovingEntity buildShortLogWithTurtles(int chance) {
-        MovingEntity m = buildBasicObject(SLOG, 80);
-        if (m != null && random.nextInt(100) < chance)
+        MovingEntity movingEntity = buildBasicObject(SLOG, 80);
+        if (movingEntity != null && random.nextInt(100) < chance)
             return new Turtles(position, velocity, random.nextInt(2));
-        return m;
+        return movingEntity;
     }
 
     public MovingEntity buildLongLogWithCrocodile(int chance) {
-        MovingEntity m = buildBasicObject(LLOG, 80);
-        if (m != null && random.nextInt(100) < chance)
+        MovingEntity movingEntity = buildBasicObject(LLOG, 80);
+        if (movingEntity != null && random.nextInt(100) < chance)
             return new Crocodile(position, velocity);
-        return m;
+        return movingEntity;
     }
 
     public MovingEntity buildVehicle() {
 
-        MovingEntity m = random.nextInt(100) < 80 ? buildBasicObject(CAR, 50) : buildBasicObject(TRUCK, 50);
-
-        if (m != null) {
+        MovingEntity movingEntity = random.nextInt(100) < 80 ? buildBasicObject(CAR, 50) : buildBasicObject(TRUCK, 50);
+        if (movingEntity != null) {
 
             if (Math.abs(velocity.getX() * copCarDelay) > World.WORLD_WIDTH) {
                 copCarDelay = 0;
@@ -121,7 +94,7 @@ public class MovingEntityFactory {
             }
             copCarDelay = 0;
         }
-        return m;
+        return movingEntity;
     }
 
     public void update(final long deltaMs) {
