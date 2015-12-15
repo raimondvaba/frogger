@@ -128,9 +128,9 @@ public class AudioEfx {
     public void update(final long deltaMs) {
         playRandomAmbientSound(deltaMs);
 
-        if (frog.isAlive && gameMusic.getState() == AudioState.PAUSED)
+        if (frog.isAlive() && gameMusic.getState() == AudioState.PAUSED)
             gameMusic.resume();
-        else if (!frog.isAlive && gameMusic.getState() == AudioState.PLAYING)
+        else if (!frog.isAlive() && gameMusic.getState() == AudioState.PLAYING)
             gameMusic.pause();
 
     }

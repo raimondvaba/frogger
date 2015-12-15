@@ -59,7 +59,7 @@ public class FroggerCollisionDetection {
 
     public void testCollision(AbstractBodyLayer<MovingEntity> l) {
 
-        if (!frog.isAlive)
+        if (!frog.isAlive())
             return;
 
         Vector2D frogPos = frogSphere.getCenterPosition();

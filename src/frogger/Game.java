@@ -97,7 +97,7 @@ public class Game extends StaticScreenGame {
                     world.getHeatWave().start(frogger, level.getLevel());
                 world.getHeatWave().perform(frogger, deltaMs, level.getLevel());
 
-                if (!frogger.isAlive)
+                if (!frogger.isAlive())
                     particleLayer.clear();
 
                 world.getGoalManager().update(deltaMs);
@@ -137,8 +137,7 @@ public class Game extends StaticScreenGame {
             case GAME_PLAY:
                 graphics.getBackgroundLayer().render(rc);
 
-                if (frogger.isAlive) {
-                	
+                if (frogger.isAlive()) {
                     movingObjectsLayer.render(rc);
                     // frog.collisionObjects.get(0).render(rc);
                     frogger.render(rc);

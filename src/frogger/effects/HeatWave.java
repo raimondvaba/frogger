@@ -57,7 +57,7 @@ public class HeatWave {
 
 
     public void perform(Frogger frogger, final long deltaMs, final int level) {
-        if (!frogger.isAlive) {
+        if (!frogger.isAlive()) {
             isHot = false;
             return;
         }

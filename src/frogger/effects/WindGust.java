@@ -58,7 +58,7 @@ public class WindGust {
     }
 
     public void perform(final Frogger frogger, final int level, final long deltaMs) {
-        if (!frogger.isAlive) {
+        if (!frogger.isAlive()) {
             isWindy = false;
             return;
         }
