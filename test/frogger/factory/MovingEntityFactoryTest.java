@@ -1,88 +1,84 @@
 package frogger.factory;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
+import org.junit.Before;
 import org.junit.Test;
 
-import frogger.Game;
 import jig.engine.util.Vector2D;
 
 public class MovingEntityFactoryTest {
 
-	@Test
-	public void testMovingEntityFactory() {
-		MovingEntityFactory movingEntityFactory = new MovingEntityFactory(new Vector2D(0, 0),new Vector2D(0,0));
-		assertNotEquals(null,movingEntityFactory);
-	}
+    private MovingEntityFactory factory;
 
-	@Test
-	public void testBuildBasicObject() {
-		MovingEntityFactory movingEntityFactory = new MovingEntityFactory(new Vector2D(0, 0),new Vector2D(0,0));
-		assertEquals(null,movingEntityFactory.buildBasicObject(5,0));
-	}
-	
-	@Test(expected=NullPointerException.class)
-	public void testBuildBasicObjectCar() {
-		MovingEntityFactory movingEntityFactory = new MovingEntityFactory(new Vector2D(0, 0),new Vector2D(0,0));
-		movingEntityFactory.update(2000);
-		movingEntityFactory.buildBasicObject(0,1000);
-	}
-	
-	@Test(expected=NullPointerException.class)
-	public void testBuildBasicObjectTruck() {
-		MovingEntityFactory movingEntityFactory = new MovingEntityFactory(new Vector2D(0, 0),new Vector2D(0,0));
-		movingEntityFactory.update(2000);
-		movingEntityFactory.buildBasicObject(1,1000);
-	}
-	
-	@Test(expected=NullPointerException.class)
-	public void testBuildBasicObjectShortLog() {
-		MovingEntityFactory movingEntityFactory = new MovingEntityFactory(new Vector2D(0, 0),new Vector2D(0,0));
-		movingEntityFactory.update(2000);
-		movingEntityFactory.buildBasicObject(2,1000);
-	}
-	
-	@Test(expected=NullPointerException.class)
-	public void testBuildBasicObjectLongLog() {
-		MovingEntityFactory movingEntityFactory = new MovingEntityFactory(new Vector2D(0, 0),new Vector2D(0,0));
-		movingEntityFactory.update(2000);
-		movingEntityFactory.buildBasicObject(3,1000);
-	}
+    @Before
+    public void setUp() {
+        factory = new MovingEntityFactory(new Vector2D(0, 0), new Vector2D(0, 0));
+    }
 
-	@Test(expected=NullPointerException.class)
-	public void testBuildShortLogWithTurtles() {
-		MovingEntityFactory movingEntityFactory = new MovingEntityFactory(new Vector2D(0, 0),new Vector2D(0,0));
-		movingEntityFactory.update(2000);
-		movingEntityFactory.buildShortLogWithTurtles(0);
-	}
+    @Test
+    public void testMovingEntityFactory() {
+        assertNotEquals(null, factory);
+    }
 
-	@Test(expected=NullPointerException.class)
-	public void testBuildLongLogWithCrocodile() {
-		MovingEntityFactory movingEntityFactory = new MovingEntityFactory(new Vector2D(0, 0),new Vector2D(0,0));
-		movingEntityFactory.update(2000);
-		movingEntityFactory.buildLongLogWithCrocodile(0);
-	}
+    @Test
+    public void testBuildBasicObject() {
+        assertEquals(null, factory.buildBasicObject(5, 0));
+    }
 
-	@Test(expected=NullPointerException.class)
-	public void testBuildVehicle() {
-		MovingEntityFactory movingEntityFactory = new MovingEntityFactory(new Vector2D(0, 0),new Vector2D(0,0));
-		movingEntityFactory.update(2000);
-		movingEntityFactory.buildVehicle();
-	}
+    @Test(expected = NullPointerException.class)
+    public void testBuildBasicObjectCar() {
+        factory.update(2000);
+        factory.buildBasicObject(0, 1000);
+    }
 
-	@Test
-	public void testUpdateNull() {
-		MovingEntityFactory movingEntityFactory = new MovingEntityFactory(new Vector2D(0, 0),new Vector2D(0,0));
-		movingEntityFactory.update(0);
-		assertNotEquals(null,movingEntityFactory);
-	}
-	
-	@Test(expected=NullPointerException.class)
-	public void testUpdateNotNull() {
-		MovingEntityFactory movingEntityFactory = new MovingEntityFactory(new Vector2D(0, 0),new Vector2D(0,0));
-		movingEntityFactory.update(2000);
-		movingEntityFactory.buildBasicObject(3,1000);
-	}
-	
+    @Test(expected = NullPointerException.class)
+    public void testBuildBasicObjectTruck() {
+        factory.update(2000);
+        factory.buildBasicObject(1, 1000);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testBuildBasicObjectShortLog() {
+        factory.update(2000);
+        factory.buildBasicObject(2, 1000);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testBuildBasicObjectLongLog() {
+        factory.update(2000);
+        factory.buildBasicObject(3, 1000);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testBuildShortLogWithTurtles() {
+        factory.update(2000);
+        factory.buildShortLogWithTurtles(0);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testBuildLongLogWithCrocodile() {
+        factory.update(2000);
+        factory.buildLongLogWithCrocodile(0);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testBuildVehicle() {
+        factory.update(2000);
+        factory.buildVehicle();
+    }
+
+    @Test
+    public void testUpdateNull() {
+        factory.update(0);
+        assertNotEquals(null, factory);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testUpdateNotNull() {
+        factory.update(2000);
+        factory.buildBasicObject(3, 1000);
+    }
 
 }
