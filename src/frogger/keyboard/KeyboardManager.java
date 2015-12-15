@@ -22,6 +22,9 @@ public class KeyboardManager {
     private boolean keyPressed = false;
     private boolean listenInput = true;
 
+    /**
+     * Handling Frogger movement from keyboard input
+     */
     public void froggerKeyboardHandler() {
         keyboard.poll();
 
@@ -41,6 +44,10 @@ public class KeyboardManager {
             game.getWorld().initialize(game.getCurrentLevel().getLevel());
         }
 
+        /*
+         * This logic checks for key strokes. It registers a key press, and
+         * ignores all other key strokes until the first key has been released
+         */
         if (downPressed || upPressed || leftPressed || rightPressed)
             keyPressed = true;
         else if (keyPressed)
@@ -69,14 +76,19 @@ public class KeyboardManager {
             game.setGameState(Game.GAME_INTRO);
     }
 
-
+    /**
+     * Handle keyboard events while at the game intro menu
+     */
     public void menuKeyboardHandler() {
         keyboard.poll();
 
+        // Following 2 if statements allow capture space bar key strokes
         if (!keyboard.isPressed(KeyEvent.VK_SPACE)) {
             hasSpaceBeenReleased = true;
-            return;
         }
+
+        if (!hasSpaceBeenReleased)
+            return;
 
         if (keyboard.isPressed(KeyEvent.VK_SPACE)) {
             switch (game.getGameState()) {
@@ -98,6 +110,9 @@ public class KeyboardManager {
             game.setGameState(Game.GAME_INSTRUCTIONS);
     }
 
+    /**
+     * Handle keyboard when finished a level
+     */
     public void finishLevelKeyboardHandler() {
         keyboard.poll();
         if (keyboard.isPressed(KeyEvent.VK_SPACE)) {
