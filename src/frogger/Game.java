@@ -25,7 +25,7 @@ public class Game extends StaticScreenGame {
         score += increment;
     }
 
-    private static final int DEFAULT_LEVEL_TIME = 60;
+    static final int DEFAULT_LEVEL_TIME = 60;
     private int levelTimer = DEFAULT_LEVEL_TIME;
 
     private World world;
