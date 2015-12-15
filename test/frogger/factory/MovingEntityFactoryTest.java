@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNotEquals;
 import org.junit.Before;
 import org.junit.Test;
 
+import frogger.factory.MovingEntityFactory;
 import jig.engine.util.Vector2D;
 
 public class MovingEntityFactoryTest {
