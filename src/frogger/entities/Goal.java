@@ -26,17 +26,18 @@
 package frogger.entities;
 
 import frogger.collision.CollisionObject;
+import frogger.goal.ReachableBonusGoal;
 import frogger.graphics.Graphics;
 import jig.engine.util.Vector2D;
 
-public class Goal extends MovingEntity {
+public class Goal extends MovingEntity implements ReachableBonusGoal {
 
-    public boolean isReached = false;
-    public boolean isBonus = false;
+    private boolean isReached = false;
+    private boolean isBonus = false;
 
-    public Goal(int loc) {
+    public Goal(int location) {
         super(Graphics.SPRITE_SHEET + "#goal");
-        position = new Vector2D(SPRITE_SIZE * (1 + 2 * loc), SPRITE_SIZE);
+        position = new Vector2D(SPRITE_SIZE * (1 + 2 * location), SPRITE_SIZE);
         collisionObjects.add(new CollisionObject("colSmall", position));
         sync(position);
         setFrame(0);
@@ -50,7 +51,8 @@ public class Goal extends MovingEntity {
         setFrame(0);
     }
 
-    public void reached() {
+    @Override
+    public void setReached() {
         isReached = true;
         setFrame(1);
     }
@@ -66,4 +68,15 @@ public class Goal extends MovingEntity {
     @Override
     public void update(long deltaMs) {
     }
+
+    @Override
+    public boolean isReached() {
+        return isReached;
+    }
+    
+    @Override
+    public boolean isBonus() {
+        return isBonus;
+    }
+
 }

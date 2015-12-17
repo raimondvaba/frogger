@@ -197,15 +197,15 @@ public class Frogger extends MovingEntity {
     }
 
     public void reach(final Goal g) {
-        if (g.isReached == false) {
+        if (g.isReached() == false) {
             AudioEfx.frogGoal.play(0.4);
             game.increaseScore(100);
             game.increaseScore(game.getLevelTimer());
-            if (g.isBonus) {
+            if (g.isBonus()) {
                 AudioEfx.bonus.play(SOUND_DURATION);
                 lives++;
             }
-            g.reached();
+            g.setReached();
             resetFrog();
         } else {
             setPosition(g.getPosition());

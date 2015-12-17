@@ -68,7 +68,7 @@ public class World {
                 new MovingEntityFactory(new Vector2D(WORLD_WIDTH, 12 * SPRITE_SIZE), new Vector2D(-0.05 * dV, 0))));
 
         goalManager.initializeGoalsPerLevel(game.getCurrentLevel().getLevel());
-        for (Goal goal : goalManager.get()) {
+        for (Goal goal : goalManager.getGoals()) {
             game.getMovingObjectsLayer().add(goal);
         }
 
