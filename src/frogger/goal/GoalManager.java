@@ -4,13 +4,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import frogger.Level;
 import frogger.entities.Goal;
 import frogger.entities.MovingEntity;
 import jig.engine.util.Vector2D;
 
 public class GoalManager {
 
-    final static int MAX_NUM_OF_GOALS = 6;
+    final static int MAX_NUMBER_OF_GOALS = 6;
 
     private List<Goal> goals;
     private Random random;
@@ -25,39 +26,46 @@ public class GoalManager {
     public GoalManager() {
         goals = new LinkedList<Goal>();
         random = new Random(System.currentTimeMillis());
-        initializeGoalsPerLevel(1);
+        initializeGoalsPerLevel(Level.STARTING_LEVEL);
     }
 
     public int initializeGoalsPerLevel(final int level) {
         goals.clear();
 
-        int stepStart, stepEnd;
-        if (level == 1) {
-            stepStart = 5;
-            stepEnd = 9;
-        } else {
-            stepStart = 3;
-            stepEnd = 11;
-        }
-
         int stepSize = 2;
+        int stepStart, stepEnd, maxGoals;
+        if (level == Level.STARTING_LEVEL) {
+            stepStart = 5;
+            maxGoals = 2;
+        } else if (level == Level.STARTING_LEVEL + 1) {
+            stepStart = 3;
+            maxGoals = 4;
+        } else {
+            stepStart = 1;
+            maxGoals = 6;
+        }
+        
+        stepEnd = stepStart + maxGoals * stepSize; 
+
         for (int step = stepStart; step < stepEnd; step += stepSize) {
-            goals.add(new Goal(new Vector2D(step * MovingEntity.SPRITE_SIZE, MovingEntity.SPRITE_SIZE)));
+            Goal goal = new Goal(new Vector2D(step * MovingEntity.SPRITE_SIZE, MovingEntity.SPRITE_SIZE));
+            goals.add(goal);
         }
 
         return goals.size();
     }
 
-    public List<Goal> get() {
+    public List<Goal> getGoals() {
         return goals;
     }
 
     private List<Goal> getUnreached() {
         List<Goal> unreachedGoals = new LinkedList<Goal>();
-        for (Goal g : goals)
-            if (!g.isReached)
-                unreachedGoals.add(g);
-
+        for (Goal goal : goals) {
+            if (!goal.isReached()) {
+                unreachedGoals.add(goal);
+            }
+        }
         return unreachedGoals;
     }
     
@@ -65,7 +73,7 @@ public class GoalManager {
         return getUnreached().size() == 0 ? true : false;
     }
 
-    public void doBonusCheck() {
+    private void doBonusCheck() {
         if (!showingBonus && deltaRateMs > BONUS_RATE_MS) {
             deltaShowMs = 0;
             showingBonus = true;
@@ -76,9 +84,11 @@ public class GoalManager {
         if (showingBonus && deltaShowMs > BONUS_SHOW_MS) {
             deltaRateMs = 0;
             showingBonus = false;
-            for (Goal g : goals)
-                if (!g.isReached)
+            for (Goal g : goals) {
+                if (!g.isReached()) {
                     g.setBonus(false);
+                }
+            }
         }
     }
 
