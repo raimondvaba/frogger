@@ -1,17 +1,11 @@
 package frogger;
 
 public class Level {
+    
+    static final int STARTING_LEVEL = 1;
+    static final int CHEATING_LEVEL = 10;
 
     private int level;
-
-    private static final int STARTING_LEVEL = 1;
-    private static final int CHEATING_LEVEL = 10;
-
-    // public Level(World world, final int level) {
-    // this.level = level;
-    // this.world = world;
-    //// initialize();
-    // }
 
     public Level() {
         level = STARTING_LEVEL;
