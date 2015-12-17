@@ -17,10 +17,10 @@ public class GoalManager {
 
     protected boolean showingBonus = false;
 
-    private int bonusRateMs = 5000;
-    private int bonusShowMs = 5000;
-    private int dRMs = 0;
-    private int dSMs = 0;
+    final static int BONUS_RATE_MS = 5000;
+    final static int BONUS_SHOW_MS = 5000;
+    private int deltaRateMs = 0;
+    private int deltaShowMs = 0;
 
     public GoalManager() {
         goals = new LinkedList<Goal>();
@@ -29,22 +29,22 @@ public class GoalManager {
     }
 
     public int initializeGoalsPerLevel(final int level) {
-
         goals.clear();
 
-        switch (level) {
-            case 1:
-                for (int i = 5; i < 9; i += 2) {
-                    goals.add(new Goal(new Vector2D(i * MovingEntity.SPRITE_SIZE, MovingEntity.SPRITE_SIZE)));
-                }
-                break;
-            default:
-                for (int i = 3; i < 11; i += 2) {
-                    goals.add(new Goal(new Vector2D(i * MovingEntity.SPRITE_SIZE, MovingEntity.SPRITE_SIZE)));
-                }
-                break;
+        int stepStart, stepEnd;
+        if (level == 1) {
+            stepStart = 5;
+            stepEnd = 9;
+        } else {
+            stepStart = 3;
+            stepEnd = 11;
         }
-        
+
+        int stepSize = 2;
+        for (int step = stepStart; step < stepEnd; step += stepSize) {
+            goals.add(new Goal(new Vector2D(step * MovingEntity.SPRITE_SIZE, MovingEntity.SPRITE_SIZE)));
+        }
+
         return goals.size();
     }
 
@@ -52,25 +52,29 @@ public class GoalManager {
         return goals;
     }
 
-    public List<Goal> getUnreached() {
+    private List<Goal> getUnreached() {
         List<Goal> unreachedGoals = new LinkedList<Goal>();
         for (Goal g : goals)
             if (!g.isReached)
-            	unreachedGoals.add(g);
+                unreachedGoals.add(g);
 
         return unreachedGoals;
     }
+    
+    public boolean areAllGoalsReached() {
+        return getUnreached().size() == 0 ? true : false;
+    }
 
     public void doBonusCheck() {
-        if (!showingBonus && dRMs > bonusRateMs) {
-            dSMs = 0;
+        if (!showingBonus && deltaRateMs > BONUS_RATE_MS) {
+            deltaShowMs = 0;
             showingBonus = true;
             List<Goal> unreachedGoals = getUnreached();
             unreachedGoals.get(random.nextInt(unreachedGoals.size())).setBonus(true);
         }
 
-        if (showingBonus && dSMs > bonusShowMs) {
-            dRMs = 0;
+        if (showingBonus && deltaShowMs > BONUS_SHOW_MS) {
+            deltaRateMs = 0;
             showingBonus = false;
             for (Goal g : goals)
                 if (!g.isReached)
@@ -79,8 +83,8 @@ public class GoalManager {
     }
 
     public void update(long deltaMs) {
-        dRMs += deltaMs;
-        dSMs += deltaMs;
+        deltaRateMs += deltaMs;
+        deltaShowMs += deltaMs;
         doBonusCheck();
     }
 }

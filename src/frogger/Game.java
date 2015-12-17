@@ -88,21 +88,24 @@ public class Game extends StaticScreenGame {
                 collisionDetection.testCollision(movingObjectsLayer);
 
                 // Wind gusts work only when Frogger is on the river
-                if (collisionDetection.isInRiver())
+                if (collisionDetection.isInRiver()) {
                     world.getWindGust().start(level.getLevel());
+                }
                 world.getWindGust().perform(frogger, level.getLevel(), deltaMs);
 
                 // Do the heat wave only when Frogger is on hot pavement
-                if (collisionDetection.isOnRoad())
+                if (collisionDetection.isOnRoad()) {
                     world.getHeatWave().start(frogger, level.getLevel());
+                }
                 world.getHeatWave().perform(frogger, deltaMs, level.getLevel());
 
-                if (!frogger.isAlive())
+                if (!frogger.isAlive()) {
                     particleLayer.clear();
+                }
 
                 world.getGoalManager().update(deltaMs);
 
-                if (world.getGoalManager().getUnreached().size() == 0) {
+                if (world.getGoalManager().areAllGoalsReached()) {
                     gameState = GAME_FINISH_LEVEL;
                     audioFx.playCompleteLevel();
                     particleLayer.clear();
