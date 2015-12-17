@@ -2,7 +2,7 @@ package frogger;
 
 public class Level {
     
-    static final int STARTING_LEVEL = 1;
+    public static final int STARTING_LEVEL = 1;
     static final int CHEATING_LEVEL = 10;
 
     private int level;
