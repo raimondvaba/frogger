@@ -11,7 +11,15 @@ import jig.engine.util.Vector2D;
 
 public class GoalManager {
 
+    final static int STARTING_NUMBER_OF_GOALS = 2;
+    final static int SECOND_LEVEL_NUMBER_OF_GOALS = 4;
     final static int MAX_NUMBER_OF_GOALS = 6;
+
+    final static int SPACE_BETWEEN_GOALS = 2;
+    
+    final static int FIRST_LEVEL_HORIZONTAL_GOAL_POS_START = 5;
+    final static int SECOND_LEVEL_HORIZONTAL_GOAL_POS_START = FIRST_LEVEL_HORIZONTAL_GOAL_POS_START - SPACE_BETWEEN_GOALS;
+    final static int MAX_LEVEL_HORIZONTAL_GOAL_POS_START = SECOND_LEVEL_HORIZONTAL_GOAL_POS_START - SPACE_BETWEEN_GOALS;
 
     private List<Goal> goals;
     private Random random;
@@ -32,31 +40,26 @@ public class GoalManager {
     public int initializeGoalsPerLevel(final int level) {
         goals.clear();
 
-        int stepSize = 2;
-        int stepStart, stepEnd, maxGoals;
+        int goalHorizontalStartingPosition, goalHorizontalEndPosition, numberOfGoals;
         if (level == Level.STARTING_LEVEL) {
-            stepStart = 5;
-            maxGoals = 2;
+            goalHorizontalStartingPosition = FIRST_LEVEL_HORIZONTAL_GOAL_POS_START;
+            numberOfGoals = STARTING_NUMBER_OF_GOALS;
         } else if (level == Level.STARTING_LEVEL + 1) {
-            stepStart = 3;
-            maxGoals = 4;
+            goalHorizontalStartingPosition = SECOND_LEVEL_HORIZONTAL_GOAL_POS_START;
+            numberOfGoals = SECOND_LEVEL_NUMBER_OF_GOALS;
         } else {
-            stepStart = 1;
-            maxGoals = 6;
+            goalHorizontalStartingPosition = MAX_LEVEL_HORIZONTAL_GOAL_POS_START;
+            numberOfGoals = MAX_NUMBER_OF_GOALS;
         }
-        
-        stepEnd = stepStart + maxGoals * stepSize; 
 
-        for (int step = stepStart; step < stepEnd; step += stepSize) {
-            Goal goal = new Goal(new Vector2D(step * MovingEntity.SPRITE_SIZE, MovingEntity.SPRITE_SIZE));
+        goalHorizontalEndPosition = goalHorizontalStartingPosition + numberOfGoals * SPACE_BETWEEN_GOALS;
+
+        for (int goalPosition = goalHorizontalStartingPosition; goalPosition < goalHorizontalEndPosition; goalPosition += SPACE_BETWEEN_GOALS) {
+            Goal goal = new Goal(new Vector2D(goalPosition * MovingEntity.SPRITE_SIZE, MovingEntity.SPRITE_SIZE));
             goals.add(goal);
         }
 
         return goals.size();
-    }
-
-    public List<Goal> getGoals() {
-        return goals;
     }
 
     private List<Goal> getUnreached() {
@@ -68,7 +71,7 @@ public class GoalManager {
         }
         return unreachedGoals;
     }
-    
+
     public boolean areAllGoalsReached() {
         return getUnreached().size() == 0 ? true : false;
     }
@@ -97,4 +100,9 @@ public class GoalManager {
         deltaShowMs += deltaMs;
         doBonusCheck();
     }
+
+    public List<Goal> getGoals() {
+        return goals;
+    }
+
 }
