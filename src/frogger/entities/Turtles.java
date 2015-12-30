@@ -20,18 +20,17 @@ public class Turtles extends MovingEntity {
     private long localDeltaMs;
     private long startAnimatingMs;
     private long timerMs;
-    private static final long ANIMATING_PERIOD_MS = 150;
+    private static final long ANIMATION_PERIOD_MS = 150;
     private int currentFrame = 0;
     private int frameMax = 2; // Animate only 2 frames
 
     public Turtles(Vector2D position, Vector2D velocity) {
-        super(Graphics.SPRITE_SHEET + "#turtles");
+        super(Graphics.getSpritePath("turtles"));
         init(position, velocity);
     }
 
     public Turtles(Vector2D position, Vector2D velocity, int water) {
-        super(Graphics.SPRITE_SHEET + "#turtles");
-        init(position, velocity);
+        this(position, velocity);
 
         if (water == 0) {
             isUnderwater = false;
@@ -62,12 +61,12 @@ public class Turtles extends MovingEntity {
             return;
 
         if (startAnimatingMs < timerMs) {
-            startAnimatingMs = timerMs + ANIMATING_PERIOD_MS;
+            startAnimatingMs = timerMs + ANIMATION_PERIOD_MS;
 
             if (isUnderwater)
-                setFrame(getFrame() - 1);
+                subMerge();
             else
-                setFrame(getFrame() + 1);
+                surface();
 
             currentFrame++;
         }
@@ -76,6 +75,16 @@ public class Turtles extends MovingEntity {
             isAnimating = false;
             isUnderwater = !isUnderwater;
         }
+    }
+
+    private int surface() {
+        setFrame(getFrame() + 1);
+        return getFrame();
+    }
+
+    private int subMerge() {
+        setFrame(getFrame() - 1);
+        return getFrame();
     }
 
     public void startAnimation() {
