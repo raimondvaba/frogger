@@ -4,7 +4,7 @@ import frogger.graphics.Graphics;
 import jig.engine.util.Vector2D;
 
 public class Turtles extends MovingEntity {
-    
+
     private final static int SIZE = 3;
 
     private long underwaterTime = 0;
@@ -64,7 +64,7 @@ public class Turtles extends MovingEntity {
             startAnimatingMs = timerMs + ANIMATION_PERIOD_MS;
 
             if (isUnderwater)
-                subMerge();
+                submerge();
             else
                 surface();
 
@@ -82,7 +82,7 @@ public class Turtles extends MovingEntity {
         return getFrame();
     }
 
-    private int subMerge() {
+    private int submerge() {
         setFrame(getFrame() - 1);
         return getFrame();
     }
