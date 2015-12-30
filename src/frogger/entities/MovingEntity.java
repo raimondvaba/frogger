@@ -54,10 +54,9 @@ public abstract class MovingEntity extends Body {
     }
 
     public MovingEntity(String name, Vector2D pos, Vector2D velocity) {
-        super(name);
+        this(name);
         position = pos;
         this.velocity = velocity;
-        collisionObjects = new LinkedList<CollisionObject>();
     }
 
     protected void setVisibleFrame(Vector2D v, int frameOneIndex, int frameTwoIndex) {
