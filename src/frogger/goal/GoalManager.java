@@ -41,24 +41,22 @@ public class GoalManager {
     final static int MAX_NUMBER_OF_GOALS = 6;
 
     final static int SPACE_BETWEEN_GOALS = 2;
-    
+
     final static int FIRST_LEVEL_HORIZONTAL_GOAL_POS_START = 5;
     final static int SECOND_LEVEL_HORIZONTAL_GOAL_POS_START = FIRST_LEVEL_HORIZONTAL_GOAL_POS_START - SPACE_BETWEEN_GOALS;
     final static int MAX_LEVEL_HORIZONTAL_GOAL_POS_START = SECOND_LEVEL_HORIZONTAL_GOAL_POS_START - SPACE_BETWEEN_GOALS;
 
-    private List<Goal> goals;
-    private Random random;
+    private List<Goal> goals = new LinkedList<Goal>();
+    private Random random = new Random(System.currentTimeMillis());
 
     protected boolean showingBonus = false;
 
     final static int BONUS_RATE_MS = 5000;
     final static int BONUS_SHOW_MS = 5000;
-    private int deltaRateMs = 0;
-    private int deltaShowMs = 0;
+    int deltaRateMs = 0;
+    int deltaShowMs = 0;
 
     public GoalManager() {
-        goals = new LinkedList<Goal>();
-        random = new Random(System.currentTimeMillis());
         initializeGoalsPerLevel(Level.STARTING_LEVEL);
     }
 
@@ -66,6 +64,7 @@ public class GoalManager {
         goals.clear();
 
         int goalHorizontalStartingPosition, goalHorizontalEndPosition, numberOfGoals;
+
         if (level == Level.STARTING_LEVEL) {
             goalHorizontalStartingPosition = FIRST_LEVEL_HORIZONTAL_GOAL_POS_START;
             numberOfGoals = STARTING_NUMBER_OF_GOALS;
