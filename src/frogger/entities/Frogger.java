@@ -54,7 +54,7 @@ public class Frogger extends MovingEntity {
     private Game game;
 
     public Frogger(Game game) {
-        super(Graphics.SPRITE_SHEET + "#frog");
+        super(Graphics.getSpritePath("frog"));
         this.game = game;
         resetFrog();
         collisionObjects.add(new CollisionObject(position));

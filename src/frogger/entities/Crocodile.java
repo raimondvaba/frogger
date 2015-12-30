@@ -46,7 +46,7 @@ public class Crocodile extends MovingEntity {
     }
 
     public Crocodile(Vector2D pos, Vector2D velocity) {
-        super(Graphics.SPRITE_SHEET + "#crocodile", pos, velocity);
+        super(Graphics.getSpritePath("crocodile"), pos, velocity);
 
         addEntityCollisionObjects(SIZE);
 

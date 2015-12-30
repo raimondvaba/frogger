@@ -13,7 +13,7 @@ public class Car extends MovingEntity {
     private static Random random = new Random(System.currentTimeMillis());
 
     public Car(Vector2D pos, Vector2D velocity) {
-        super(Graphics.SPRITE_SHEET + "#car" + random.nextInt(TYPES), pos, velocity);
+        super(Graphics.getSpritePath("car") + random.nextInt(TYPES), pos, velocity);
         addEntityCollisionObjects(SIZE);
         setVisibleFrame(velocity, 1, 0);
     }

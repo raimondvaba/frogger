@@ -34,7 +34,7 @@ public class LongLog extends MovingEntity {
     public final static int LENGTH = SPRITE_SIZE * SIZE;
 
     public LongLog(Vector2D pos, Vector2D velocity) {
-        super(Graphics.SPRITE_SHEET + "#longlog", pos, velocity);
+        super(Graphics.getSpritePath("longlog"), pos, velocity);
         addEntityCollisionObjects(SIZE);
         setVisibleFrame(velocity, 1, 0);
     }

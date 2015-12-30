@@ -34,7 +34,7 @@ public class ShortLog extends MovingEntity {
     public final static int LENGTH = SPRITE_SIZE * SIZE;
 
     public ShortLog(Vector2D pos, Vector2D velocity) {
-        super(Graphics.SPRITE_SHEET + "#shortlog", pos, velocity);
+        super(Graphics.getSpritePath("shortlog"), pos, velocity);
         addEntityCollisionObjects(SIZE);
         setVisibleFrame(velocity, 1, 0);
     }

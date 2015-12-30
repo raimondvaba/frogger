@@ -33,7 +33,7 @@ public class CopCar extends MovingEntity {
     private final static int SIZE = 1;
 
     public CopCar(Vector2D pos, Vector2D velocity) {
-        super(Graphics.SPRITE_SHEET + "#copcar", pos, velocity);
+        super(Graphics.getSpritePath("copcar"), pos, velocity);
         addEntityCollisionObjects(SIZE);
         setVisibleFrame(velocity, 1, 0);
     }
