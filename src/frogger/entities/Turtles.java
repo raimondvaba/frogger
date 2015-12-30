@@ -8,7 +8,7 @@ public class Turtles extends MovingEntity {
     private final static int SIZE = 3;
 
     private long underwaterTime = 0;
-    private long underwaterMaximumPeriod = 1200;
+    private static final long MAXIMUM_UNDERWATER_PERIOD = 1200;
 
     protected boolean isUnderwater = false;
 
@@ -22,7 +22,7 @@ public class Turtles extends MovingEntity {
     private long timerMs;
     private static final long ANIMATION_PERIOD_MS = 150;
     private int currentFrame = 0;
-    private int frameMax = 2; // Animate only 2 frames
+    private int maxFrame = 2; // Animate only 2 frames
 
     public Turtles(Vector2D position, Vector2D velocity) {
         super(Graphics.getSpritePath("turtles"));
@@ -48,9 +48,9 @@ public class Turtles extends MovingEntity {
         setVisibleFrame(velocity, 0, 3);
     }
 
-    public void checkAirTime() {
+    public void checkUnderwaterTime() {
         underwaterTime += localDeltaMs;
-        if (underwaterTime > underwaterMaximumPeriod) {
+        if (underwaterTime > MAXIMUM_UNDERWATER_PERIOD) {
             underwaterTime = 0;
             startAnimation();
         }
@@ -64,27 +64,17 @@ public class Turtles extends MovingEntity {
             startAnimatingMs = timerMs + ANIMATION_PERIOD_MS;
 
             if (isUnderwater)
-                submerge();
+                descend();
             else
-                surface();
+                ascend();
 
             currentFrame++;
         }
 
-        if (currentFrame >= frameMax) {
+        if (currentFrame >= maxFrame) {
             isAnimating = false;
             isUnderwater = !isUnderwater;
         }
-    }
-
-    private int surface() {
-        setFrame(getFrame() + 1);
-        return getFrame();
-    }
-
-    private int submerge() {
-        setFrame(getFrame() - 1);
-        return getFrame();
     }
 
     public void startAnimation() {
@@ -98,7 +88,17 @@ public class Turtles extends MovingEntity {
         super.update(deltaMs);
         localDeltaMs = deltaMs;
         timerMs += localDeltaMs;
-        checkAirTime();
+        checkUnderwaterTime();
         animate();
+    }
+
+    private int ascend() {
+        setFrame(getFrame() + 1);
+        return getFrame();
+    }
+
+    private int descend() {
+        setFrame(getFrame() - 1);
+        return getFrame();
     }
 }
