@@ -42,7 +42,7 @@ public class WindGust {
     
     private int spriteSize = 32;
 
-    private final Random random;
+    private final Random random = new Random(System.currentTimeMillis());;
 
     private long timeMs;
     private long durationMs;
@@ -54,7 +54,6 @@ public class WindGust {
     public WindGust() {
         timeMs = 0;
         isWindy = false;
-        random = new Random(System.currentTimeMillis());
     }
 
     public void perform(final Frogger frogger, final int level, final long deltaMs) {
@@ -96,7 +95,7 @@ public class WindGust {
         Vector2D windParticlePosition = new Vector2D(0, randomYWindPosition);
         Vector2D windVelocity = new Vector2D(0.2 + random.nextDouble(), (random.nextDouble() - 0.5) * 0.1);
         
-        return new Particle(Graphics.SPRITE_SHEET + "#white_dot", windParticlePosition, windVelocity);
+        return new Particle(Graphics.getSpritePath("white_dot"), windParticlePosition, windVelocity);
     }
 
     public void update(final long deltaMs) {
