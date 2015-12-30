@@ -5,10 +5,10 @@ import jig.engine.util.Vector2D;
 
 public class Turtles extends MovingEntity {
 
-    private final static int SIZE = 3;
+    private static final int SIZE = 3;
+    private static final long MAXIMUM_UNDERWATER_PERIOD = 1200;
 
     private long underwaterTime = 0;
-    private static final long MAXIMUM_UNDERWATER_PERIOD = 1200;
 
     protected boolean isUnderwater = false;
 
@@ -63,10 +63,11 @@ public class Turtles extends MovingEntity {
         if (startAnimatingMs < timerMs) {
             startAnimatingMs = timerMs + ANIMATION_PERIOD_MS;
 
-            if (isUnderwater)
+            if (isUnderwater) {
                 descend();
-            else
+            } else {
                 ascend();
+            }
 
             currentFrame++;
         }
