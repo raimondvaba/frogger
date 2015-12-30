@@ -71,26 +71,26 @@ public class HeatWave {
             isHot = false;
     }
 
-    public void start(Frogger f, final int gameLevel) {
+    public void start(Frogger frogger, final int gameLevel) {
 
         if (!isHot && timeMs > PERIOD_MS) {
             if (random.nextInt(100) < gameLevel * levelMultiplier) {
                 durationMs = 1;
                 isHot = true;
-                f.hw_hasMoved = false;
+                frogger.hw_hasMoved = false;
                 AudioEfx.heat.play(0.2);
             }
             timeMs = 0;
         }
     }
 
-    public MovingEntity genParticles(Vector2D pos) {
+    public MovingEntity genParticles(Vector2D position) {
         if (!isHot || random.nextInt(100) > 10)
             return null;
 
         Vector2D velocity = new Vector2D((random.nextDouble() - 0.5) * 0.1, (random.nextDouble() - 0.5) * 0.1);
 
-        return new Particle(Graphics.SPRITE_SHEET + "#smoke_cloud", pos, velocity, DURATION_MS);
+        return new Particle(Graphics.getSpritePath("smoke_cloud"), position, velocity, DURATION_MS);
     }
 
     public void update(final long deltaMs) {
