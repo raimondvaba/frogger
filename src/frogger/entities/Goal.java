@@ -36,16 +36,12 @@ public class Goal extends MovingEntity implements ReachableBonusGoal {
     private boolean isBonus = false;
 
     public Goal(int location) {
-        super(Graphics.getSpritePath("goal"));
-        position = new Vector2D(SPRITE_SIZE * (1 + 2 * location), SPRITE_SIZE);
-        collisionObjects.add(new CollisionObject("colSmall", position));
-        sync(position);
-        setFrame(0);
+        this(new Vector2D(SPRITE_SIZE * (1 + 2 * location), SPRITE_SIZE));
     }
 
-    public Goal(Vector2D pos) {
+    public Goal(Vector2D position) {
         super(Graphics.getSpritePath("goal"));
-        position = pos;
+        this.position = position;
         collisionObjects.add(new CollisionObject("colSmall", position));
         sync(position);
         setFrame(0);

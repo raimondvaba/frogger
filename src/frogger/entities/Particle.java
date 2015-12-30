@@ -37,33 +37,32 @@ import jig.engine.util.Vector2D;
  */
 public class Particle extends MovingEntity {
 
-    private int timeExpire = 1;
-    private int timeAlive = 1;
+    private int timeExpire;
+    private int timeAlive;
 
-    public Particle(String sprite, Vector2D pos, Vector2D v) {
-        super(sprite, pos, v);
-        setActivation(true);
-        timeExpire = 0;
+    public Particle(String spritePath, Vector2D position, Vector2D velocity) {
+        this(spritePath, position, velocity, 0);
     }
 
     /**
      * Build particle with expiration timer
      * 
-     * @param pos
+     * @param position
      *            - position
-     * @param v
+     * @param velocity
      *            - velocity
-     * @param te
+     * @param timeExpire
      *            - expiration timer in milliseconds
      */
-    public Particle(String sprite, Vector2D pos, Vector2D v, int te) {
-        super(sprite);
-        position = pos;
-        velocity = v;
+    public Particle(String spritePath, Vector2D position, Vector2D velocity, int timeExpire) {
+        super(spritePath);
+        this.position = position;
+        this.velocity = velocity;
+        this.timeExpire = timeExpire;
         setActivation(true);
-        timeExpire = te;
     }
 
+    @Override
     public void update(final long deltaMs) {
         super.update(deltaMs);
 
