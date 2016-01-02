@@ -39,15 +39,10 @@ public class World {
 
     public void initialize(final int level) {
 
-        /*
-         * dV is the velocity multiplier for all moving objects at the current
-         * game level
-         */
         double dV = level * 0.05 + 1;
 
         game.getMovingObjectsLayer().clear();
 
-        /* River Traffic */
         river.clear();
         river.addAll(Arrays.asList(
                 new MovingEntityFactory(new Vector2D(-(SPRITE_SIZE * 3), 2 * SPRITE_SIZE), new Vector2D(0.06 * dV, 0)),
@@ -56,7 +51,6 @@ public class World {
                 new MovingEntityFactory(new Vector2D(-(SPRITE_SIZE * 4), 5 * SPRITE_SIZE), new Vector2D(0.045 * dV, 0)),
                 new MovingEntityFactory(new Vector2D(WORLD_WIDTH, 6 * SPRITE_SIZE), new Vector2D(-0.045 * dV, 0))));
 
-        /* Road Traffic */
         road.clear();
         road.addAll(Arrays
                 .asList(new MovingEntityFactory(new Vector2D(WORLD_WIDTH, 8 * SPRITE_SIZE), new Vector2D(-0.1 * dV, 0)),
@@ -72,10 +66,6 @@ public class World {
             game.getMovingObjectsLayer().add(goal);
         }
 
-        /*
-         * Build some traffic before game starts running
-         * MovingEntityFactories for fews cycles
-         */
         for (int i = 0; i < 500; i++)
             cycleTraffic(10);
 
@@ -91,7 +81,6 @@ public class World {
         MovingEntity me;
         MovingEntityFactory mef;
 
-        /* Road traffic updates */
         for (MovingEntityFactory lane : road) {
             lane.update(deltaMs);
             if ((me = lane.buildVehicle()) != null) {
@@ -99,7 +88,6 @@ public class World {
             }
         }
 
-        /* River traffic updates */
         int i = 0;
         mef = river.get(i++);
         mef.update(deltaMs);

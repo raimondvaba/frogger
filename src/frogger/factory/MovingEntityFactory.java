@@ -1,4 +1,3 @@
-
 package frogger.factory;
 
 import java.util.Random;

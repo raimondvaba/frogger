@@ -223,7 +223,6 @@ public class Frogger extends MovingEntity {
         updateFollow(deltaMs);
         setFrame(currentFrame);
 
-        // Level timer stuff
         deltaTime += deltaMs;
         if (deltaTime > ONE_SECOND_MS) {
             deltaTime = 0;
